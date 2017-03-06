@@ -1,0 +1,62 @@
+
+
+
+<body >
+
+
+
+  <ons-navigator animation="slide" var="salesNavigator">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Log In</div>
+        <div class="right"><ons-toolbar-button>Cerrar</ons-toolbar-button></div>
+      </ons-toolbar>
+
+
+
+      <div class="login-form">
+
+        <input type="text" class="text-input--underbar" placeholder="Usuario" value="" ng-model="user">
+        <input type="password" class="text-input--underbar" placeholder="Clave" value="" ng-model="pass">
+        <input type="text" class="text-input--underbar" placeholder="Sociedad" value="" ng-model="sociedad" disabled="true">
+        <br><br>
+        <ons-button modifier="large" class="login-button" ng-click="salesNavigator.pushPage('home.html');">
+<ons-ripple></ons-ripple>
+        Log In</ons-button>
+        <br>
+
+         <ons-button modifier="large" class="config-button" ng-click="salesNavigator.pushPage('config.html');">Configuración</ons-button>
+   
+      </div>
+
+    </ons-page>
+</ons-navigator>
+
+
+
+<ons-template id="config.html">
+  <ons-page ng-controller="ConfigController">
+   <ons-toolbar>
+      <div class="left">
+        <ons-back-button>Volver</ons-back-button>
+      </div>
+      <div class="center">Configuraciones</div>
+    </ons-toolbar>
+
+
+    <p style="text-align: center">
+      <ons-button modifier="light" ng-click="addTables();">Crear Base de Datos</ons-button>
+    </p>
+  </ons-page>
+</ons-template>
+
+
+
+
+
+
+     
+
+</body>
+
+

@@ -1,0 +1,108 @@
+
+
+
+
+<!--	<ons-navigator animation="node" title="Navigator" var="tabs">  ng-click="tabs.replacePage('indian.html');" -->
+
+
+<!--<ons-navigator title="Navigator" var="orderNav">-->
+<ons-page ng-controller="BusinessPartnerController" >
+
+ 
+   <ons-toolbar>
+      <div class="left">
+      <!-- <ons-toolbar-button  ng-click="orderNav.pushPage('home.html', { animation: 'slide' });">
+
+         <!-- <ons-icon icon="fa-chevron-left" style="font-size: 32px; width: 1em"> 
+        </ons-toolbar-button>-->
+        
+         <ons-back-button></ons-back-button>
+      </div>
+      <div class="center">Clientes</div>
+       <div class="right">
+ 
+        <ons-toolbar-button  ng-click="salesNavigator.pushPage('views/bp/newCustomer.html', { animation: 'slide' },{ param1: 'value1', param2: 'value2' });">
+          <ons-icon icon="fa-plus" style="font-size: 32px; width: 1em">
+        </ons-toolbar-button>
+
+      </div>
+    </ons-toolbar>
+
+  <!-- segment control -->
+<!--<div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+          
+            <div class="button-bar" style="width:200px; margin:8px auto 0;">
+              <div class="button-bar__item" ng-click="showBPDiv();">
+                  <input type="radio" name="navi-segment-a"  checked  >
+                  <div class="button-bar__button" >Clientes</div>
+              </div>
+
+              <div class="button-bar__item" ng-click="showFiltrosDiv();">
+                  <input type="radio" name="navi-segment-a" >
+                  <div class="button-bar__button">Filtros</div>
+              </div>
+            </div>
+
+          </div>
+</div>-->
+
+<div class="content" ng-show="divBP">
+  
+  <div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <input type="search" ng-model="query" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Buscar">
+
+          </div>
+ </div>
+
+         <!-- <ons-list class="customer-list" ng-repeat="char in ['A', 'B', 'C', 'D', 'E']">
+          <ons-list-header class="customer-list-header">{{char}}</ons-list-header>
+          <ons-list-item class="customer" modifier="chevron" ng-repeat="i in [1,2,3,4,5]">
+            <ons-row>
+              <ons-col width="40px">
+               C0001
+              </ons-col>
+              <ons-col class="customer-client">
+                   - La Casa de la Caña
+              </ons-col>
+            </ons-row>
+          </ons-list-item>
+        </ons-list>-->
+ <ons-list class="items-list" ><!--ng-repeat="char in ['A','B']"-->
+          <!--<ons-list-header class="items-list-header">{{char}}</ons-list-header>-->
+          <ons-list-item class="items" modifier="chevron"  ng-repeat="businessPartner in businessPartners | filter:query | orderBy: 'cardName'"  ng-click="showDetail($index)">
+            
+         
+           <ons-row>
+              <ons-col width="45px">
+                <span style="color:blue;">{{businessPartner.cardCode}}</span>
+              </ons-col>
+           </ons-row>
+            <ons-row>
+              <ons-col class="items-client">
+                <span style="color:black;">{{businessPartner.cardName}}</span>
+              </ons-col>
+            </ons-row>
+          </ons-list-item>
+        </ons-list>
+
+       
+
+
+</div>
+
+<div class="ng-cloak" ng-show="filtros">
+  
+  contenido b
+</div>
+
+
+
+
+  </ons-page>
+<!--</ons-navigator>-->
+
+

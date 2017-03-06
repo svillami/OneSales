@@ -1,0 +1,100 @@
+<ons-page >
+
+            <ons-toolbar>
+                <div class="left"><ons-back-button>Volver</ons-back-button></div>
+                <div class="center">Cliente</div>
+            </ons-toolbar>
+
+            <ons-list modifier="inset" style="margin-top: 10px" ng-controller="BusinessPartnerDetailController" >
+                <ons-list-item class="item">
+                    <ons-row>
+                        <ons-col width="60px">
+                            <div class="item-thum"></div>
+                        </ons-col>
+                        <ons-col>
+                            <header>
+                                <span class="item-title">{{ getParams().cardCode }}</span>
+                              
+                            </header>
+                            <p class="item-desc">{{ getParams().cardName }}</p>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+
+
+                <ons-list-item >
+                  <ons-row>
+         <span style="color:blue">Rif:</span>
+
+ </ons-row>
+   <ons-row>
+                  {{ getParams().licTradNum }} 
+
+                  </ons-row>
+                </ons-list-item>
+
+
+    <ons-list-item >
+                  <ons-row>
+         <span style="color:blue">Balance:</span>
+
+ </ons-row>
+   <ons-row>
+                   {{ getParams().balance }}
+
+                  </ons-row>
+                </ons-list-item>
+
+  <ons-list-item >
+                  <ons-row>
+         <span style="color:blue">Telefonos:</span>
+
+ </ons-row>
+   <ons-row>
+                  {{ getParams().phone1 }} / {{ getParams().phone2 }}
+
+                  </ons-row>
+                </ons-list-item>
+
+                <ons-list-item >
+                  <ons-row>
+         <span style="color:blue">Email:</span>
+
+ </ons-row>
+   <ons-row>
+                  {{ getParams().email }}
+
+                  </ons-row>
+                </ons-list-item>
+
+
+
+    <ons-list-item >
+                  <ons-row>
+         <span style="color:blue">Persona Contacto:</span>
+
+ </ons-row>
+   <ons-row>
+                  {{ getParams().contactName }}
+
+                  </ons-row>
+                </ons-list-item>
+
+                        <ons-list-item >
+                  <ons-row>
+         <span style="color:blue">Condición de pago:</span>
+
+ </ons-row>
+   <ons-row>
+                   {{ getParams().pymntGroup }}
+                  </ons-row>
+                </ons-list-item>
+
+            <ons-list-item modifier="chevron" ng-click="salesNavigator.pushPage('views/bp/BpDocuments.html');">
+                  <ons-row>
+                      <span style="color:blue">Documentos:</span>
+                  </ons-row>
+            </ons-list-item>
+
+
+</ons-page>

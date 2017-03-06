@@ -1,0 +1,102 @@
+<ons-page >
+
+  <ons-toolbar>
+      <div class="left"><ons-back-button>Volver</ons-back-button></div>
+      <div class="center">Articulo</div>
+  </ons-toolbar>
+
+  <ons-list modifier="inset" style="margin-top: 10px" ng-controller="ItemDetailsController" >
+          <ons-list-item class="item">
+              <ons-row>
+                  <ons-col width="60px">
+                      <div class="item-thum"></div>
+                  </ons-col>
+                  <ons-col>
+                      <header>
+                          <span class="item-title">{{ getParams().itemCode }}</span>
+                        
+                      </header>
+                      <p class="item-desc">{{ getParams().itemName }}</p>
+                  </ons-col>
+              </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Articulo:</span>
+
+            </ons-row>
+            <ons-row>
+                {{ getParams().itemCode }}
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                <span style="color:blue">Descripción:</span>
+
+            </ons-row>
+            <ons-row>
+                {{ getParams().itemName }}
+            </ons-row>
+          </ons-list-item>
+
+
+          <ons-list-item>
+              <ons-row>
+                <span style="color:blue">Grupo:</span>
+              </ons-row>
+              <ons-row>
+                {{ getParams().groupName }}
+              </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+              <ons-row>
+                   <span style="color:blue">Fabricante:</span>
+              </ons-row>
+              <ons-row>
+                   {{ getParams().firmName }}
+              </ons-row>
+          </ons-list-item>
+
+          <ons-list-item modifier="chevron" ng-click="showPriceList()">
+              <ons-row>
+                  <span style="color:blue">Precio:</span>
+
+              </ons-row>
+              <ons-row>
+                  {{ getParams().price }}&nbsp{{ getParams().currency }} 
+              </ons-row>
+          </ons-list-item>
+
+          <ons-list-item modifier="chevron" ng-click="showStock()">
+                <ons-row>
+                    <span style="color:blue">Stock:</span>
+                </ons-row>
+                <ons-row>
+                    {{getParams().stock }} 
+                </ons-row>
+          </ons-list-item>
+
+           <ons-list-item >
+                <ons-row>
+                    <span style="color:blue">Unidad Medida de Venta:</span>
+                </ons-row>
+                <ons-row>
+                    {{ getParams().salesUnit }}
+                </ons-row>
+            </ons-list-item>
+
+           <ons-list-item >
+                <ons-row>
+                    <span style="color:blue">Articulos por Unidad de Medida:</span>
+                </ons-row>
+                <ons-row>
+                    {{ getParams().salesUnitQty }}
+                </ons-row>
+          </ons-list-item>
+  </ons-list>
+
+
+</ons-page>

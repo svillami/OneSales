@@ -1,0 +1,80 @@
+<body>
+   
+<ons-page ng-controller="ActivityController">
+
+    <ons-toolbar>
+     
+      <div class="left">
+       <!--<div class="left"><ons-back-button>Volver</ons-back-button></div>-->
+             <ons-toolbar-button ng-click="backActivities();">
+          <ons-icon icon="ion-chevron-left" style="font-size: 30px; width: 1em">
+         <!-- <span style="color:blue">Volver</span>-->
+        </ons-toolbar-button>
+      </div>
+     
+      <div class="center">Opciones</div>
+   
+ <div class="right">
+   	
+
+   	   <ons-toolbar-button  ng-click="popover.show($event)">
+          <ons-icon icon="ion-ios-more" style="font-size: 32px; width: 1em">
+        </ons-toolbar-button>
+
+   </div>
+
+    </ons-toolbar>
+<br>
+<ons-list>
+  <ons-list-item >
+         <input type="text" class="text-input--transparent" disabled="true" style="width: 100%;text-align: center;" ng-model="customer"/>
+        </ons-list-item>
+</ons-list>
+<br>
+    <ons-list>
+        <ons-list-item modifier="chevron" ng-click="newOrder();">
+          <ons-icon icon="fa-list-ul" size="20px" ></ons-icon>
+          Pedido de Cliente
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="showBP();">
+          <ons-icon icon="fa-users" size="20px"></ons-icon>
+          Cliente
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="salesNavigator.pushPage('views/items/items.html');">
+          <ons-icon icon="fa-cube" size="20px"></ons-icon>
+           Productos
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="newPayment();">
+          <ons-icon icon="fa-credit-card" size="20px"></ons-icon>
+          Pagos
+        </ons-list-item>
+
+          <ons-list-item modifier="chevron" ng-click="">
+          <!--<ons-icon icon="fa-calendar" size="20px"></ons-icon>-->
+         Comercialización (Merchandising)
+        </ons-list-item>
+
+    </ons-list>
+  
+  </ons-page>
+
+  <!--</ons-navigator>-->
+
+<!--<ons-template id="activitiesOption.html" ng-controller="ActivitiesController">
+  <ons-popover cancelable direction="down">
+    <ons-list>
+      <ons-list-item modifier="tappable" ng-click="x();">
+        Iniciar Actividad
+      </ons-list-item>
+      <ons-list-item modifier="tappable">
+        Culminar Actividad
+      </ons-list-item>
+   
+    </ons-list>
+  </ons-popover>
+</ons-template>-->
+
+</body>

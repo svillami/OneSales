@@ -1,0 +1,66 @@
+<ons-page ng-controller="OrdersController"> 
+
+<!-- Detalle -->
+  <ons-toolbar>
+      <div class="left"><ons-back-button>Volver</ons-back-button></div>
+      <div class="center">Detalle Completo</div>
+  </ons-toolbar>
+
+<ons-list modifier="inset" style="margin-top: 10px" ng-controller="OrdersController" >
+          <ons-list-item class="item">
+              <ons-row>
+                  <ons-col width="60px">
+                      <div class="item-thum"></div>
+                  </ons-col>
+                  <ons-col>
+                      <header>
+                          <span class="item-title"></span>
+                        
+                      </header>
+                      <p class="item-desc">{{ getParamsOrderLine().dscription}}</p>
+                  </ons-col>
+              </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Codigo del Articulo:</span>
+
+            </ons-row>
+            <ons-row>
+                {{getParamsOrderLine().itemCode }}
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Cantidad de Articulos:</span>
+
+            </ons-row>
+            <ons-row>
+                {{getParamsOrderLine().quantity }}
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Precio Unitario:</span>
+                 	
+            </ons-row>
+            <ons-row>
+                {{getParamsOrderLine().price }} Bs.
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                <span style="color:blue">Monto Total:</span>
+                  
+            </ons-row>
+            <ons-row>
+               {{ getParamsOrderLine().lineTotal }} Bs.
+            </ons-row>
+          </ons-list-item>
+</ons-list>
+
+</ons-page>

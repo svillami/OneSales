@@ -1,0 +1,152 @@
+<body >
+
+<script>
+ 
+</script>
+
+<ons-page  ng-controller="OrdersController"><!--ng-controller="PageController">-->
+
+
+
+   <ons-toolbar>
+      <div class="left">
+       <!-- <ons-back-button>Volver</ons-back-button>-->
+
+  <ons-toolbar-button  ng-click="cancelOrder();">
+         Cancelar
+        </ons-toolbar-button>
+
+      </div>
+      <div class="center">Pedido</div>
+    
+    <div class="right">
+ 
+        <ons-toolbar-button  ng-click="saveOrder();"><!--salesNavigator.pushPage('home.html', { animation: 'slide' },{ param1: 'value1', param2: 'value2' });-->
+         Listo
+        </ons-toolbar-button>
+
+      </div>   
+    </ons-toolbar>
+
+
+<!--<button ng-click='sayHello(user)'>greet</button>
+ <input type="text"  placeholder="Usuario"  ng-model="user">
+-->
+
+<br>
+ <ons-list  modifier="inset"  >
+       
+        <ons-list-item modifier="chevron"   ng-click="goToSelectBP();" > <!--salesNavigator.pushPage('views/orders/selectClient.html', { animation: 'slide' });-->
+<ons-row>
+         <span style="color:blue">Cliente:</span>
+
+ </ons-row>
+<ons-row>
+              <ons-col class="order-client">
+                 <span style="color:black">{{ getParams().cardName }}</span><!--{{ getParams().cardName }}-->
+                
+              </ons-col>
+        </ons-row>
+			<!--<ons-row>
+              <ons-col class="order-client">
+                 
+              <span style="color:blue">Cliente:</span>
+              </ons-col>
+            </ons-row>
+<ons-row>
+              <ons-col class="order-client">
+                   IDA:
+              </ons-col>
+            </ons-row>-->
+
+        </ons-list-item>
+        <ons-list-item  >
+        <span style="color:blue">Fecha Doc:</span>
+  <input type="date" class="text-input--transparent" style="width: 100%" ng-model="DocDate">
+ 
+        </ons-list-item>
+    <ons-list-item  >
+        <span style="color:blue">Fecha Entrega:</span>
+  		<input type="date" class="text-input--transparent" style="width: 100%" ng-model="DocDueDate"/>
+ 
+        </ons-list-item>
+
+       
+        <ons-list-item><span style="color:blue">Comentario: <span style="color:black">{{Comments}}</span></span>
+<input type="text" class="text-input text-input--transparent" ng-change="addComments();" placeholder="Comentario" ng-model="Comments"
+ style="width: 100%"  > <!---->
+        </ons-list-item>
+ 
+ </ons-list>  
+  
+
+
+<br>
+
+
+ <ons-list modifier="inset" > 
+<ons-list-item modifier="chevron" ng-click="goToSelectItems();"><!--salesNavigator.pushPage('views/orders/selectItems.html', { animation: 'slide' });"-->
+ <span style="color:blue">Articulos:</span>
+  <span style="color:black">{{ getParams().lines.length }}&nbspSeleccionados&nbsp {{ getParams().qtyItems}} </span>
+</ons-list-item>
+ </ons-list>
+
+<br>
+
+<div>
+ <ons-list modifier="inset" > 
+<ons-list-item >
+ <ons-row>
+<ons-col>
+<span style="color:blue" >Base Imponible:</span>
+</ons-col>
+<ons-col>
+<input type="text" style="color:black" ng-model="baseImp" ng-value="{{getTotals()}}" class="text-input--transparent"   disabled="true">
+</ons-col>
+</ons-row>
+</ons-list-item>
+<ons-list-item >
+ <span style="color:blue">% Descuento:</span>
+</ons-list-item>
+<ons-list-item >
+ <span style="color:blue">Descuento:</span>
+</ons-list-item>
+<ons-list-item >
+  <ons-row>
+<ons-col>
+<span style="color:blue" >Impuesto:</span>
+</ons-col>
+<ons-col>
+<input type="text" style="color:black" ng-model="vatSum" ng-value="{{getTotals()}}" class="text-input--transparent"   disabled="true">
+</ons-col>
+</ons-row>
+</ons-list-item>
+<ons-list-item >
+ <ons-row>
+<ons-col>
+<span style="color:blue" >Total:</span>
+</ons-col>
+<ons-col>
+<input type="text" style="color:black" ng-model="docTotal" ng-value="{{getTotals()}}" class="text-input--transparent"   disabled="true">
+</ons-col>
+</ons-row>
+</ons-list-item>
+ </ons-list>
+</div>
+
+
+  </ons-page>
+
+<!--
+<ons-template id="date.html" >
+ 
+  <ons-dialog var="dialog" modifier="date" cancelable>
+  
+   <div style="padding: 0 22px 22px 22px">
+  <input type="date" class="text-input" ng-model="inputDate"/>
+  </div>
+ </ons-dialog>
+
+</ons-template>-->
+
+</body>

@@ -1,0 +1,92 @@
+
+      <ons-page ng-controller="LoadActivitiesController">
+
+<ons-toolbar>
+      <div class="left">
+      <!-- <ons-toolbar-button  ng-click="orderNav.pushPage('home.html', { animation: 'slide' });">
+
+         <!-- <ons-icon icon="fa-chevron-left" style="font-size: 32px; width: 1em"> 
+        </ons-toolbar-button>-->
+        
+         <ons-back-button>Volver</ons-back-button>
+      </div>
+      <div class="center">Actividades</div>
+       <div class="right">
+ 
+     
+      </div>
+    </ons-toolbar>
+<div class="upper_area" style="text-align: center;">
+<ons-list class="date">
+<ons-list-item  ng-controller="DateController">
+<ons-row>
+ <!-- {{date | date:'yyyy-MM-dd'}}-->
+ <ons-col class="center" style="text-align: center;">
+ <div style="text-align: center;">
+  <span style="color:blue;">Fecha:</span>
+   </div>
+ </ons-col>
+ 	<ons-col class="center" style="text-align: center;">
+	 <input type="date" class="text-input--transparent" style="width: 100%;text-align: center;" ng-model="date"/>
+	 </ons-col>
+	 <ons-col>
+
+	 </ons-col>
+	 </ons-row>
+	 </ons-list-item>
+</ons-list>
+</div>
+
+<br>
+
+  <div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <input type="search" ng-model="query" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Buscar">
+
+          </div>
+ </div>
+
+        <ons-list class="plan-list">
+        <ons-scroller style="height: 400px; width: 100%">
+          <ons-list-item modifier="chevron" class="plan" ng-repeat="activity in activities | filter:query | orderBy: 'cardName'" ng-click="showActivity(activity,$index)">
+            <ons-row>
+              <ons-col width="80px" class="plan-left">
+                <div class="plan-date">{{activity.hour}}</div>
+                <div class="plan-duration">{{activity.duration}}</div>
+              </ons-col>
+
+              <ons-col width="6px" class="plan-center" ng-style="{backgroundColor:activity % 3 == 1 ? '#3399ff' : '#ccc'}">
+              </ons-col>
+
+              <ons-col class="plan-right">
+                <div class="plan-name">{{activity.action}}</div>
+                <div class="customer-name">{{activity.cardName}}</div>
+                <div class="plan-info">
+                  <div ng-hide="activity % 4 == 0">
+                    <ons-icon icon="fa-phone"></ons-icon>{{activity.phone}}
+                  </div>
+
+                  <div ng-hide="activity % 3 == 0">
+                    <ons-icon icon="fa-map-marker"></ons-icon>{{activity.address}}
+                  </div>
+                </div>
+              </ons-col>
+            </ons-row>
+          </ons-list-item>
+ </ons-scroller>
+        </ons-list>
+
+<script type="text/ons-template" id="popover.html">
+  <ons-popover direction="up down" cancelable>
+    <div style="text-align: center; opacity: 0.5;">
+      <p>This is a popover!</p>
+      <p><small>Click the background to remove the popover.</small></p>
+    </div>
+  </ons-popover>
+</script>
+
+      </ons-page>
+
+
+    

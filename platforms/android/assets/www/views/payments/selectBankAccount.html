@@ -1,0 +1,84 @@
+
+
+
+
+<!--	<ons-navigator animation="node" title="Navigator" var="tabs">  ng-click="tabs.replacePage('indian.html');" -->
+
+
+<!--<ons-navigator title="Navigator" var="orderNav">-->
+<ons-page>
+
+ 
+   <ons-toolbar>
+      <div class="left">
+      <!-- <ons-toolbar-button  ng-click="orderNav.pushPage('home.html', { animation: 'slide' });">
+
+         <!-- <ons-icon icon="fa-chevron-left" style="font-size: 32px; width: 1em"> 
+        </ons-toolbar-button>-->
+        
+         <ons-back-button>Volver</ons-back-button>
+      </div>
+      <div class="center">Cuentas Bancarias</div>
+       <div class="right">
+ 
+        <!--<ons-toolbar-button  ng-click="salesNavigator.pushPage('views/orders/orders.html', { animation: 'slide' },{ param1: 'value1', param2: 'value2' });">
+         Listo
+        </ons-toolbar-button>-->
+
+      </div>
+    </ons-toolbar>
+
+
+<div class="content">
+  
+  <div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <input type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Buscar">
+
+          </div>
+ </div>
+
+         <!-- <ons-list class="client-list" ng-repeat="char in ['A', 'B', 'C', 'D', 'E']">
+          <ons-list-header class="client-list-header">{{char}}</ons-list-header>
+          <ons-list-item class="client" modifier="tappable" ng-repeat="i in [1,2,3,4,5]">
+           
+ <ons-row>
+            <label class="radio-button radio-button--list-item">
+             C0001 - La Casa de La Caña
+            <input type="radio" name="a" checked="checked">
+            <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+           
+          </label>
+            
+          </ons-row>
+
+
+           
+          </ons-list-item>
+        </ons-list>-->
+
+       
+ <ons-list class="items-list" ng-controller="SelectBankAcctController" ><!--ng-repeat="char in ['A','B']"-->
+          <!--<ons-list-header class="items-list-header">{{char}}</ons-list-header>-->
+          <ons-list-item class="items"  ng-repeat="account in banks" modifier="tappable">
+            
+            <label class="radio-button radio-button--list-item">
+             <span>{{account.bankAcct}} - {{account.acctName}}</span>
+            <input type="radio" name="bpCheck" ng-click="selectBank($index)"> <!--checked="checked"-->
+            <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          </label>
+          </ons-list-item>
+        </ons-list>
+
+
+
+</div>
+
+
+
+
+  </ons-page>
+<!--</ons-navigator>-->
+
+

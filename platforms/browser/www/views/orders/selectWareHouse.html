@@ -1,0 +1,49 @@
+<ons-page ng-controller="selectWhsCodeController">
+
+ 
+   <ons-toolbar>
+      <div class="left">
+      <!-- <ons-toolbar-button  ng-click="orderNav.pushPage('home.html', { animation: 'slide' });">
+
+         <!-- <ons-icon icon="fa-chevron-left" style="font-size: 32px; width: 1em"> 
+        </ons-toolbar-button>-->
+        
+         <ons-back-button>Volver</ons-back-button>
+      </div>
+      <div class="center">Almacen</div>
+    
+    </ons-toolbar>
+<div class="content">
+  
+ 
+<br>
+          <ons-list modifier="inset" class="items-list"  ><!--ng-repeat="char in ['A','B']"-->
+          <!--<ons-list-header class="items-list-header">{{char}}</ons-list-header>-->
+          <ons-list-item class="items" modifier="tappable" ng-repeat="inventory in whsStockList"  ng-click="selectWhs(inventory,$index);" >
+            
+         
+          <ons-row>
+              <ons-col >
+              <span style="color:blue;">{{inventory.whsCode}}</span>
+              </ons-col>
+            <ons-col >
+              <span style="color:blue;">{{inventory.whsName}}</span>
+              </ons-col>
+            </ons-row>
+
+          </ons-list-item>
+        </ons-list>
+
+       
+
+
+</div>
+
+
+
+
+
+  </ons-page>
+<!--</ons-navigator>-->
+
+

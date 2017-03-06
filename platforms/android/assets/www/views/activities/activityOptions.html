@@ -1,0 +1,16 @@
+
+<ons-page >
+   <ons-popover cancelable direction="down">
+   <input type="text" class="text-input text-input--transparent" ng-hide="true" ng-model="value"
+ style="width: 100%"  >
+    <ons-list ng-controller="ActController">
+      <ons-list-item modifier="tappable" ng-hide="value == 0" ng-click="startActivity();">
+        Iniciar Actividad
+      </ons-list-item>
+      <ons-list-item modifier="tappable" ng-click="closeActivity();">
+        Culminar Actividad
+      </ons-list-item>
+   
+    </ons-list>
+  </ons-popover>
+  <ons-page>

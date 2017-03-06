@@ -1,0 +1,177 @@
+<style type="text/css">
+ 
+
+  .boton-form {
+  text-align: center;
+  width: 80%;
+  margin: 60px auto 0;
+
+}  
+</style>
+ <!-- <style type="text/css">
+ .col {
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: hidden;
+  padding: 4px;
+  color: #999;}
+
+</style>-->
+<ons-page ng-controller="PaymentsMeansController">
+
+<ons-toolbar>
+      <div class="left">
+      <!-- <ons-toolbar-button  ng-click="orderNav.pushPage('home.html', { animation: 'slide' });">
+
+         <!-- <ons-icon icon="fa-chevron-left" style="font-size: 32px; width: 1em"> 
+        </ons-toolbar-button>-->
+        
+         <ons-back-button>Volver</ons-back-button>
+      </div>
+      <div class="center">Medios de Pago</div>
+       <div class="right">
+ 
+        <ons-toolbar-button  ng-click="save();">
+         Listo
+        </ons-toolbar-button>
+
+      </div>
+    </ons-toolbar>
+
+<div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <!-- segment control -->
+            <div class="button-bar" style="width:200px; margin:8px auto 0;">
+              <div class="button-bar__item" ng-click="showDivEfectivo();">
+                  <input type="radio" name="navi-segment-a"  checked >
+                  <div class="button-bar__button" >Efectivo</div>
+              </div>
+
+              <div class="button-bar__item" ng-click="showDivTransf();">
+                  <input type="radio" name="navi-segment-a" >
+                  <div class="button-bar__button">Transf.</div>
+              </div>
+
+<div class="button-bar__item" ng-click="showDivCheque();">
+                  <input type="radio" name="navi-segment-a" >
+                  <div class="button-bar__button">Cheque</div>
+              </div>
+
+            </div>
+
+          </div>
+</div>
+
+<div ng-show="efectivo" class="ng-cloak">
+  <br>
+  <ons-list modifier="inset" >
+
+  <ons-list-item modifier="chevron" ng-click="goToSelectAccountBank('cash');"><span style="color:blue">Cuenta Bancaria:</span>
+<span style="color:black">{{ getParams().bankCashAcct }}</span><!--{{ getParams().cardName }}-->
+      
+        </ons-list-item>
+    <ons-list-item  >
+
+  <ons-list-item><span style="color:blue">Monto: {{ getParams().cashSum }}</span>
+<input type="number" class="text-input text-input--transparent" ng-model="cashSum" ng-change="addCashSum();" placeholder="Efectivo" style="width: 100%" ng-init="2">
+        </ons-list-item>
+  </ons-list>
+</div>
+
+<div ng-show="transf" class="ng-cloak">
+  <br>
+  <ons-list modifier="inset" >
+ <ons-list-item modifier="chevron" ng-click="goToSelectAccountBank('transf');">
+ <span style="color:blue">Cuenta Bancaria:</span>
+  <span style="color:black">{{ getParams().bankTransferAcct }}</span><!--{{ getParams().cardName }}-->
+                
+             
+        </ons-list-item>
+   <ons-list-item  >
+        <span style="color:blue">Fecha Transferencia:</span>
+  <input type="date" class="text-input--transparent" style="width: 100%" ng-model="transferDate">
+ 
+        </ons-list-item>
+  <ons-list-item><span style="color:blue">Monto: {{ getParams().transfSum }}</span>
+<input type="number" class="text-input text-input--transparent" ng-model="transferSum" ng-change="addTransferSum();" placeholder="Monto Transferencia" style="width: 100%">
+        </ons-list-item>
+        <ons-list-item><span style="color:blue">Referencia:</span>
+<input type="number" class="text-input text-input--transparent" ng-model="transferRef" placeholder="Referencia" style="width: 100%">
+        </ons-list-item>
+  </ons-list>
+    
+  
+</div>
+
+<div ng-show="cheque" class="ng-cloak">
+  <br>
+  <ons-list modifier="inset" >
+
+   <ons-list-item modifier="chevron" ng-click="goToSelectAccountBank('check');"><span style="color:blue">Cuenta Bancaria:</span>
+<span style="color:black">{{ getParams().bankCheckAcct }}</span><!--{{ getParams().cardName }}-->
+                
+  
+        </ons-list-item>
+    <ons-list-item><span style="color:blue">Nro. Cheque:</span>
+<input type="text"  ng-model="nroCheck" class="text-input text-input--transparent" ng-mode="ref" placeholder="Nro. Cheque" style="width: 100%">
+        </ons-list-item>
+
+
+
+          <ons-list-item  >
+        <span style="color:blue">Fecha Cheque:</span>
+  <input type="date"  ng-model="DocDate" class="text-input--transparent" style="width: 100%">
+ 
+        </ons-list-item>
+     <ons-list-item><span style="color:blue">Monto: </span>
+<input type="number" ng-model="checkSum" class="text-input text-input--transparent"  placeholder="Monto Cheque" style="width: 100%">
+        </ons-list-item>
+  </ons-list>
+
+ <br>
+<ons-button modifier="large" class="config-button" ng-click="addCheck();">Agregar</ons-button>
+
+ <br>
+ <ons-list  class="items-list" modifier="inset">
+ <ons-list-item modifier="tappable" ng-repeat="check in checks" >
+ <ons-carousel swipeable style="height: 100px; width: 100%;" initial-index="10" auto-scroll>
+          <ons-carousel-item class="list-action-menu" >
+            <ons-button ng-click="checks.splice($index, 1)" style="background-color:rgba(171, 38, 38, 0.81)">
+              Eliminar
+              <ons-icon icon="ion-trash-a">
+            </ons-button>
+          </ons-carousel-item>
+
+
+
+<ons-carousel-item class="list-action-item">   
+<ons-row >
+ <ons-col align="center">
+<div style="text-align: center;">
+  <span  ng-click="" style="color:blue;">{{check.checkAmount}} Bs.</span>
+
+</div>
+</ons-col>
+</ons-row>
+<ons-row>
+<ons-col align="center">
+<div style="text-align: center;">
+  <span ng-click="" style="color:blue;"> #. {{check.bankAccount}}</span>
+</div>
+</ons-col>
+</ons-row>
+  </ons-carousel-item>
+        </ons-carousel>  
+            </ons-list-item>  
+  </ons-list>
+
+
+   
+
+
+</div>
+
+
+</ons-page>
+

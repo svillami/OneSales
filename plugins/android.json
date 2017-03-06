@@ -1,0 +1,28 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.oneSales"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.oneSales"
+        },
+        "cordova-sqlite-ext": {
+            "PACKAGE_NAME": "com.oneSales"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.oneSales"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.oneSales"
+        }
+    }
+}

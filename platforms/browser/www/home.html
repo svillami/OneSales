@@ -1,0 +1,184 @@
+<body>
+   
+
+
+   <ons-sliding-menu main-page="listMenu.html" menu-page="menu.html" side="left" 
+   max-slide-distance="250px" var="menu" close-on-tap>
+  </ons-sliding-menu>
+
+<ons-template id="listMenu.html">
+  
+
+  <!--<ons-navigator animation="slide" var="toolBar">-->
+  
+
+<ons-page>
+
+    <ons-toolbar>
+     
+      <div class="left">
+        <ons-toolbar-button ng-click="menu.toggleMenu()">
+          <ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em;"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+     
+      <div class="center">Menu</div>
+    </ons-toolbar>
+
+<br>
+
+<!--
+    <!--Menu Originales, botones en lista
+    <ons-list>
+        <ons-list-item modifier="chevron" ng-click="salesNavigator.pushPage('views/orders/orders.html');">
+          <ons-icon icon="fa-list-ul" size="20px" ></ons-icon>
+          Pedidos de Clientes
+        </ons-list-item>
+        <ons-list-item modifier="chevron" ng-click="salesNavigator.pushPage('views/bp/customers.html');">
+          <ons-icon icon="fa-users" size="20px"></ons-icon>
+          Clientes
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="salesNavigator.pushPage('views/items/items.html');">
+          <ons-icon icon="fa-cube" size="20px"></ons-icon>
+           Productos
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="salesNavigator.pushPage('views/prices/price.html');">
+          <ons-icon icon="fa-list" size="20px"></ons-icon>
+           Lista de Precios
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="salesNavigator.pushPage('views/payments/payments.html');">
+          <ons-icon icon="fa-credit-card" size="20px"></ons-icon>
+          Pagos
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="salesNavigator.pushPage('views/activities/activities.html');">
+          <ons-icon icon="fa-calendar" size="20px"></ons-icon>
+          Actividades (Rutero)
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable" ng-click="Sync();" ng-controller="SyncController">
+          <ons-icon icon="ion-android-sync" size="20px"></ons-icon>
+          Sincronizar
+        </ons-list-item>
+    </ons-list>
+    <!--Fin Menu Original
+-->
+ 
+
+<!--Nuevo Menu con botones circulares y dentro de filas y columnas-->
+<div style="text-align: center">
+  <ons-row>
+      <ons-col>
+        <!--Pedidos de Clientes-->
+        <button class="fab" ng-click="salesNavigator.pushPage('views/orders/orders.html');">
+          <ons-icon icon="fa-list-ul" size="20px"></ons-icon>
+        <i class="zmdi zmdi-car"> </i></button>
+        <p align="center" style="font-size:80%; color:#4282cc;">Pedidos de Clientes</p>
+        
+      </ons-col>
+
+      <ons-col>
+        <!--Clientes-->
+        <button class="fab" ng-click="salesNavigator.pushPage('views/bp/customers.html');">
+          <ons-icon icon="fa-users" size="20px"></ons-icon>
+        <i class="zmdi zmdi-car"></i></button>
+        <p align="center" style="font-size:80%; color:#4282cc;">Clientes </p>
+        
+      </ons-col>
+
+      <ons-col>
+        <!--Productos-->
+        <button class="fab" ng-click="salesNavigator.pushPage('views/items/items.html');">
+          <ons-icon icon="fa-cube" size="20px"></ons-icon>
+        <i class="zmdi zmdi-car"></i></button>
+        <p align="center" style="font-size:80%; color:#4282cc;">Productos </p>
+        
+      </ons-col>
+
+      <ons-col>
+        <!--Lista de Precios-->
+        <button class="fab" ng-click="salesNavigator.pushPage('views/prices/price.html');">
+          <ons-icon icon="fa-list" size="20px"></ons-icon>
+        <i class="zmdi zmdi-car"></i></button>
+        <p align="center" style="font-size:80%; color:#4282cc;">Lista de Precios </p>
+        
+      </ons-col>
+
+  </ons-row>
+  <ons-row>
+      <ons-col>
+        <!--Pagos-->
+        <button class="fab" ng-click="salesNavigator.pushPage('views/payments/payments.html');">
+          <ons-icon icon="fa-credit-card" size="20px"></ons-icon>
+        <i class="zmdi zmdi-car"></i></button>
+        <p align="center" style="font-size:80%; color:#4282cc;">Pagos </p>
+        
+      </ons-col>
+
+      <ons-col>
+        <!--Actividades (Rutero)-->
+        <button class="fab" ng-click="salesNavigator.pushPage('views/activities/activities.html');">
+          <ons-icon icon="fa-calendar" size="20px"></ons-icon>
+        <i class="zmdi zmdi-car"></i></button>
+        <p align="center" style="font-size:80%; color:#4282cc;">Actividades (Rutero) </p>
+        
+      </ons-col>
+
+      <ons-col>
+        <!--Sincronizar-->
+        <button class="fab" ng-click="Sync();" ng-controller="SyncController">
+          <ons-icon icon="ion-android-sync" size="25px"></ons-icon>
+        <i class="zmdi zmdi-car"></i></button>
+        <p align="center" style="font-size:80%; color:#4282cc;">Sincronizar </p>
+        
+      </ons-col>
+
+      <ons-col>
+        <!--Ayuda-->
+        <button class="fab">
+          <ons-icon icon="ion-help" size="25px"></ons-icon>
+        <i class="zmdi zmdi-car"></i></button>
+        <p align="center" style="font-size:80%; color:#4282cc;">Ayuda </p>
+      </ons-col>
+  </ons-row>
+
+</div>
+<!--Fin Menu nuevo-->
+
+</ons-page>
+
+  <!--</ons-navigator>-->
+
+
+
+
+</ons-template>
+
+
+<ons-template id="">
+  <ons-page>
+    
+  </ons-page>
+</ons-template>
+
+
+<ons-template id="menu.html">
+ <ons-page modifier="menu-page">
+  <ons-list>
+    <ons-list-item modifier="chevron" onclick="menu.setMainPage('login.html', {closeMenu: true})">
+       log off
+    </ons-list-item>
+
+        <ons-list-item modifier="chevron" onclick="menu.setMainPage('login.html', {closeMenu: true})">
+      <ons-icon icon="ion-android-settings" style="font-size: 32px; width: 1em">
+     
+    </ons-list-item>
+     
+  </ons-list>
+  </ons-page>
+</ons-template>
+
+</body>

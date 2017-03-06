@@ -1,0 +1,129 @@
+<ons-page ng-controller="OrdersController">
+
+<!-- Lista de pedidos con resumen y detalles -->
+  <ons-toolbar>
+      <div class="left"><ons-back-button>Volver</ons-back-button></div>
+      <div class="center">Resumen</div>
+  </ons-toolbar>
+
+<!-- Buscador -->
+  <div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <!-- segment control -->
+            <div class="button-bar" style="width:200px; margin:8px auto 0;">
+              <div class="button-bar__item" ng-click="showOrderSummary();">
+                  <input type="radio" name="navi-segment-a"  checked >
+                  <div class="button-bar__button" >Resumen</div>
+              </div>
+
+              <div class="button-bar__item" ng-click="showOrderDetails();">
+                  <input type="radio" name="navi-segment-a" >
+                  <div class="button-bar__button">Detalle</div>
+              </div>
+            </div>
+
+          </div>
+</div>
+
+<!-- Summary-->
+ <div class="content" ng-show="summary">       
+
+    <ons-list class="order"  modifier="inset" style="margin-top: 10px" ng-controller="OrdersController" >
+          <ons-list-item class="item">
+              <ons-row>
+                  <ons-col width="60px">
+                      <div class="item-thum"></div>
+                  </ons-col>
+                  <ons-col>
+                      <header>
+                          <span class="item-title"></span>
+                        
+                      </header>
+                      <p class="item-desc"> {{getParams().cardName}}</p>
+                  </ons-col>
+              </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Codigo del Articulo:</span>
+
+            </ons-row>
+            <ons-row>
+                {{ getParams().cardCode }}
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Fecha:</span>
+
+            </ons-row>
+            <ons-row>
+                
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Base Imponible:</span>
+
+            </ons-row>
+            <ons-row>
+                resta entre el total y el impuesto el vatsum Bs.
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Impuesto:</span>
+
+            </ons-row>
+            <ons-row>
+            
+                {{ getParams().vatSum }} Bs.
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                <span style="color:blue">Monto Total:</span>
+                  
+            </ons-row>
+            <ons-row>
+               {{ getParams().docTotal }} Bs.
+            </ons-row>
+          </ons-list-item>
+    </ons-list>
+  </div>
+
+
+  <!-- Details-->
+ <div class="content" ng-show="details"> 
+ 
+     <div class="navigation-bar">
+              <div class="navigation-bar__center">
+
+                <input type="search" class="search-input" ng-model="query" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Buscar">
+
+              </div>
+     </div>
+
+    <ons-list class="order-list" ng-controller="OrdersController" > 
+       <ons-list-item class="orderLine" modifier="chevron" ng-repeat="orderLine in ordersLine | filter:query"  ng-click="showMoreDetails($index)" ><!--ng-repeat="i in [1,2,3,4,5]">-->
+            <!-- <span style="color:blue;">{{order.docEntry}}</span>&nbsp-&nbsp{{order.cardName}}&nbsp-&nbsp{{order.docTotal}}&nbsp-&nbsp{{order.docDate}} -->
+
+            <ons-row>
+                <span style="color:#4282cc">{{orderLine.dscription}} </span>
+            </ons-row>
+            <ons-row>
+                <span style="color:black"> Total: {{orderLine.lineTotal}} Bs. </span>
+            </ons-row>
+
+        </ons-list-item>
+      </ons-list>
+
+ </div>
+
+</ons-page>

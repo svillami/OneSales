@@ -1,0 +1,150 @@
+<ons-page ng-controller="AddPaidToDatePaymentController">
+
+<ons-toolbar>
+      <div class="left">
+      <!-- <ons-toolbar-button  ng-click="orderNav.pushPage('home.html', { animation: 'slide' });">
+
+         <!-- <ons-icon icon="fa-chevron-left" style="font-size: 32px; width: 1em"> 
+        </ons-toolbar-button>-->
+        
+         <ons-back-button>Volver</ons-back-button>
+      </div>
+      <div class="center">Facturas</div>
+       <div class="right">
+ 
+        <ons-toolbar-button  ng-click="saveInvoices();"><!--salesNavigator.pushPage('views/orders/newOrder.html', { animation: 'slide' },{ param1: 'value1', param2: 'value2' });-->
+         Listo
+        </ons-toolbar-button>
+
+      </div>
+    </ons-toolbar>
+
+<br>
+
+
+
+
+
+
+<ons-list class="order-list" >
+          <!--<ons-list-header class="order-list-header">{{char}}</ons-list-header>-->
+          <ons-list-item class="order" ng-repeat="doc in documents | filter:query | orderBy: 'docEntry'">
+        
+          <ons-row >
+ <ons-col align="center">
+<div style="text-align: center;">
+  <span  ng-click="invoiceDetails($index,item);" style="color:blue;">Nº<span style="color:black;">{{doc.docEntry}}00000000000</span></span>&nbsp-&nbsp
+  <span ng-click="invoiceDetails($index,item);" style="color:blue;">Fecha:&nbsp<span style="color:black;">{{doc.docDate}}</span></span>
+ 
+</div>
+</ons-col>
+</ons-row>
+
+<div style="text-align: center;">
+  <span  ng-click="invoiceDetails($index,item);" style="color:blue;">Total:<span style="color:black;">{{doc.docTotal}}</span></span>&nbsp-&nbsp
+  <span ng-click="invoiceDetails($index,item);" style="color:blue;">Saldo:&nbsp<span style="color:black;">{{doc.pending}}</span></span>
+ 
+</div>
+<ons-row >
+
+</ons-row>
+<ons-row>
+
+ <ons-col width="50px"> 
+
+ <div>
+ <!--<select >
+        <option value="#">Unid</option>
+        <option value="#">Caja</option>
+        ng-click="increaseItem(item.itemCode);"
+    </select>-->
+  
+  </div>
+  </ons-col>
+  <ons-col width="35px">
+  
+  </ons-col>
+
+
+  <ons-col width="60px">
+<div>
+
+<input type="number" ng-model="doc.appliedSum" ng-value="doc.appliedSum" ng-init="doc.appliedSum=doc.appliedSum" style="width:100px;;min-height:1.75em;height:1.79em" text-align:"center;" ng-change="invoiceAppliedSum(doc);">
+  
+   </div>
+     </ons-col >
+     <ons-col width="35px">
+
+     </ons-col>
+   
+<ons-col align="right">
+<div style="text-align: right;">
+
+  <span ng-click="" style="color:blue;">Monto:&nbsp<span style="color:black;">{{doc.appliedSum}}</span></span>
+</div>
+</ons-col>
+</ons-row>
+            
+          </ons-list-item>
+        </ons-list>
+<br>
+<div>
+
+ <ons-list > 
+ 
+<ons-list-item >
+<ons-row>
+<ons-col>
+<span style="color:blue" >Total a Pagar:</span>
+</ons-col>
+<ons-col>
+<input type="text" style="color:black" ng-model="Total" ng-value="{{getTotalAppliedSum()}}" class="text-input--transparent"   disabled="true">
+</ons-col>
+</ons-row>
+</ons-list-item>
+<ons-list-item >
+<ons-row>
+<ons-col>
+<span  style="color:blue;">Total Pagado:</span>
+</ons-col>
+<ons-col>
+<input type="text" style="color:black" ng-model="TotalAppliedSum" class="text-input--transparent" disabled="true">
+</ons-col>
+</ons-row>
+</ons-list-item>
+
+<ons-list-item >
+<ons-row>
+ <ons-col>
+<span  style="color:blue;">Saldo Pendiente:</span>
+</ons-col>
+<ons-col>
+<input type="text" style="color:black" ng-model="TotalPendig" class="text-input--transparent" disabled="true">
+</ons-col>
+</ons-row>
+</ons-list-item>
+
+ </ons-list>
+</div>
+
+
+
+
+ <div style="text-align: center; line-height: 44px">
+    
+<ons-toolbar-button  ng-click="addMoreDocument();"><!--salesNavigator.pushPage('views/orders/selectItems.html', { animation: 'slide' },{ param1: 'value1', param2: 'value2' });-->
+         Agregar Documento
+        </ons-toolbar-button>
+
+  </div>
+<!--<ons-bottom-toolbar>
+  <div style="text-align: center; line-height: 44px">
+  	
+<ons-toolbar-button  ng-click="salesNavigator.pushPage('views/orders/selectItems.html', { animation: 'slide' },{ param1: 'value1', param2: 'value2' });">
+         Agregar Articulos
+        </ons-toolbar-button>
+
+  </div>
+</ons-bottom-toolbar>-->
+
+</ons-page>

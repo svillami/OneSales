@@ -1,0 +1,196 @@
+
+
+
+
+<!--	<ons-navigator animation="node" title="Navigator" var="tabs">  ng-click="tabs.replacePage('indian.html');" -->
+
+
+<!--<ons-navigator title="Navigator" var="orderNav">-->
+<ons-page ng-controller="PaymentsController">
+
+ 
+   <ons-toolbar>
+      <div class="left">
+      <!-- <ons-toolbar-button  ng-click="orderNav.pushPage('home.html', { animation: 'slide' });">
+
+         <!-- <ons-icon icon="fa-chevron-left" style="font-size: 32px; width: 1em"> 
+        </ons-toolbar-button>-->
+        
+         <!--<ons-back-button>Volver</ons-back-button>-->
+               <ons-toolbar-button ng-click="backMenu();">
+          <ons-icon icon="ion-ios-arrow-back" style="font-size: 30px; width: 1em">
+         <!-- <span style="color:blue">Volver</span>-->
+        </ons-toolbar-button>
+      </div>
+      <div class="center">Pagos</div>
+       <div class="right">
+ 
+        <ons-toolbar-button  ng-click="newPayment();">
+          <ons-icon icon="fa-plus" style="font-size: 32px; width: 1em">
+        </ons-toolbar-button>
+
+      </div>
+    </ons-toolbar>
+
+
+<div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <!-- segment control -->
+            <div class="button-bar" style="width:200px; margin:8px auto 0;">
+              <div class="button-bar__item" ng-click="showPaymentDiv();">
+                  <input type="radio" name="navi-segment-a"  checked >
+                  <div class="button-bar__button" >Pagos</div>
+              </div>
+
+              <div class="button-bar__item" ng-click="showFiltrosDiv();">
+                  <input type="radio" name="navi-segment-a" >
+                  <div class="button-bar__button">Filtros</div>
+              </div>
+            </div>
+
+          </div>
+</div>
+
+<div class="content" ng-show="divPayments" >
+  
+  <div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <input type="search" ng-model="query" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Buscar">
+
+          </div>
+ </div>
+
+          <ons-list class="payment-list" ><!--ng-repeat="char in ['A', 'B', 'C', 'D', 'E']"-->
+         <!--<ons-list-header class="payment-list-header">{{char}}</ons-list-header>-->
+          <ons-list-item class="payment" modifier="chevron" ng-repeat="payment in payments | filter:query | orderBy: 'docEntry'"  ng-click="showDetail(payment,$index)"><!--ng-repeat="i in [1,2,3,4,5]">-->
+            <ons-row>
+              <ons-col width="40px">
+               {{payment.docEntry}}
+              </ons-col>
+              <ons-col class="payment-client">
+                   {{payment.cardName}}
+              </ons-col>
+            </ons-row>
+             <ons-row>
+              <ons-col width="40px">
+               
+              </ons-col>
+              <ons-col class="payment-client">
+                   {{payment.docTotal}} Bs.
+              </ons-col>
+            </ons-row>
+          </ons-list-item>
+        </ons-list>
+
+       
+
+
+</div>
+
+<div ng-show="filtros" class="ng-cloak">
+  
+  <br>
+
+
+
+<ons-list  modifier="inset"  >
+       
+
+ </ons-list-item>
+
+        <ons-list-item  > 
+         <span style="color:blue">Filtrar por Cliente:
+         </span>
+       
+         </span>
+     <ons-switch modifier="list-item" ng-model="checkCliente" ng-change="activarFiltroCliente();"></ons-switch>
+
+
+    </ons-list-item>
+
+        <ons-list-item modifier="chevron"  ng-show="checkCliente"  ng-click="goToSelectBPFilter();" > 
+<ons-row>
+         <span style="color:blue">Cliente: <span style="color:black">{{cardName}}</span></span>
+<input type="text" class="text-input--transparent"  ng-show="false" style="width: 100%" ng-model="cardName" ng-value="{{getFilters()}}"/>
+ 
+ </ons-row>
+
+
+        
+
+      </ons-list-item>
+
+ <ons-list-item  > 
+         <span style="color:blue">Filtrar por Fechas:
+         </span>
+       
+         </span>
+     <ons-switch modifier="list-item" ng-model="checkFechas" ng-change="activarFiltroFechas();"></ons-switch>
+
+
+        </ons-list-item>
+
+     <ons-list-item   ng-show="checkFechas" > 
+<ons-row>
+         <span style="color:blue">Fecha Desde: <span style="color:black">{{ DocDateFrom }}</span></span>
+  <input type="date" class="text-input--transparent"  style="width: 100%" ng-model="DocDateFrom"/>
+ 
+ </ons-row>
+
+</ons-list-item>
+
+     <ons-list-item  ng-show="checkFechas"> 
+<ons-row>
+         <span style="color:blue">Fecha Hasta: <span style="color:black">{{ DocDateTo }}</span></span>
+  <input type="date" class="text-input--transparent" style="width: 100%" ng-model="DocDateTo"/>
+ 
+ </ons-row>
+
+
+        </ons-list-item>
+
+        <ons-list-item  ng-click="goToOrderBy();"> 
+         <span style="color:blue">Ordenar:
+         
+     <ons-switch modifier="list-item" ng-model="checkOrdenar" ng-change="activarOrdenar();"></ons-switch>
+
+
+        </ons-list-item>
+       
+  <ons-list-item  ng-show="checkOrdenar"> 
+<ons-row>
+         
+  <label class="radio-button radio-button--list-item">
+             <span>Ascendente</span>
+            <input type="radio" name="bpOrdenar" ng-click="selectFilterOrdernar('ASC')"> <!--checked="checked"-->
+            <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          </label>
+ 
+ </ons-row>
+        </ons-list-item>
+
+ 
+   <ons-list-item  ng-show="checkOrdenar"> 
+<ons-row>
+          <label class="radio-button radio-button--list-item">
+             <span>Descendente</span>
+            <input type="radio" name="bpOrdenar" ng-click="selectFilterOrdernar('DESC')"> <!--checked="checked"-->
+            <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          </label>
+ </ons-row>
+
+         </ons-list-item>
+
+        </ons-list>
+
+</div>
+
+
+
+
+  </ons-page>
+<!--</ons-navigator>-->
+
+

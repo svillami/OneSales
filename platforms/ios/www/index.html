@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- CSP support mode (required for Windows Universal apps): https://docs.angularjs.org/api/ng/directive/ngCsp -->
+<html lang="en" ng-app="app" ng-csp ng-strict-di>
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- JS dependencies (order matters!) -->
+    <script src="js/platformOverrides.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script src="js/jquery-1.12.2.min.js"></script>
+    
+    <!-- CSS dependencies -->
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
+
+    <!-- CSS dependencies ButtonStyle Nuevo -->
+    <link rel="stylesheet" href="lib/onsen/css/fab.css" />
+
+    <!-- CSP support mode (required for Windows Universal apps) -->
+    <link rel="stylesheet" href="lib/angular/angular-csp.css" />
+    <link rel="stylesheet" href="./css/login.css">
+    
+    <!-- --------------- App init --------------- -->
+
+    <title>OneSales App</title>
+
+   <script src="js/oneSales.js"></script>
+   <script src="js/controllers/dialogController.js"></script>
+   <script src="js/controllers/configController.js"></script>
+   <script src="js/controllers/items/itemsController.js"></script>
+   <script src="js/controllers/items/itemDetailsController.js"></script>
+   <script src="js/controllers/items/priceListController.js"></script>
+   <script src="js/controllers/items/wareHouseController.js"></script>
+   <script src="js/controllers/businessPartners/businessPartnerController.js"></script>
+   <script src="js/controllers/businessPartners/businessPartnerDetailController.js"></script>
+   <script src="js/controllers/orders/ordersController.js"></script>
+   
+   <script src="js/controllers/orders/orderDatailsController.js"></script>
+   
+   <script src="js/controllers/orders/addQtyItemsController.js"></script>
+   <script src="js/controllers/orders/itemDetailOrderController.js"></script>
+   <script src="js/controllers/orders/SelectWhsCodeController.js"></script> 
+   <script src="js/controllers/orders/selectPriceListController.js"></script>
+   <script src="js/controllers/payments/paymentsController.js "></script>
+   <script src="js/controllers/payments/selectBankAcctController.js"></script>
+   <script src="js/controllers/payments/paymentMeansController.js"></script>
+   <script src="js/controllers/payments/pendingDocsController.js"></script>
+   <script src="js/controllers/payments/addPaidToDatePaymentController.js"></script>
+   <script src="js/controllers/dateController.js"></script>
+   <script src="js/controllers/activities/activitiesController.js"></script>
+   <script src="js/controllers/activities/activityController.js"></script>
+   <script src="js/controllers/items/itemsGroupController.js"></script>
+   <script src="js/controllers/prices/priceController.js"></script>
+   <script src="js/controllers/synchronizers/SyncController.js"></script>
+
+   <script src="js/SQLitePlugin.js"></script>
+   <script src="js/connection/dbConnection.js"></script>
+   <script src="js/model/item.js"></script>
+   <script src="js/model/price.js"></script>
+   <script src="js/model/inventory.js"></script>
+   <script src="js/model/businessPartner.js"></script>
+   <script src="js/model/order.js"></script>
+   <script src="js/model/orderLine.js"></script>
+   <script src="js/model/payment.js"></script>
+   <script src="js/model/bankAccount.js"></script>
+   <script src="js/model/check.js"></script>
+   <script src="js/model/Document.js"></script>
+   <script src="js/model/DocumentLine.js"></script>
+   <script src="js/model/activity.js"></script>
+   <script src="js/model/location.js"></script>
+   <script src="js/model/visit.js"></script>
+   <script src="js/model/filters.js"></script>
+   <script src="js/model/itemGroup.js"></script>
+  
+   <!-- <script>
+   
+      var oneApp =  angular.module('app', ['onsen']);
+
+function PageController($scope, $http, $filter) {
+  var pages= $scope.salesNavigator.getPages();
+var i=0;
+
+
+$scope.user = "John Doe";
+
+$scope.sayHello = function() {
+    $scope.user = 'Hello ' + $scope.user + '!';
+  };
+
+}
+
+PageController.$inject = ["$scope", "$http", "$filter"];
+
+oneApp.controller('PageController', PageController);
+
+
+
+    </script>-->
+
+   <style>
+@media (min-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ }
+@media (min-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+@media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+</style>
+
+</head>
+
+<body>
+    <!-- Cordova reference -->
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+    <!-- -->
+
+
+
+  <div ons-loading-placeholder="login.html">
+    
+  </div>
+
+
+
+   
+</body>
+</html>

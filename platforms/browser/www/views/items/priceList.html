@@ -1,0 +1,64 @@
+
+
+
+
+<!--	<ons-navigator animation="node" title="Navigator" var="tabs">  ng-click="tabs.replacePage('indian.html');" -->
+
+
+<!--<ons-navigator title="Navigator" var="orderNav">-->
+<ons-page>
+
+ 
+   <ons-toolbar>
+      <div class="left">
+      <!-- <ons-toolbar-button  ng-click="orderNav.pushPage('home.html', { animation: 'slide' });">
+
+         <!-- <ons-icon icon="fa-chevron-left" style="font-size: 32px; width: 1em"> 
+        </ons-toolbar-button>-->
+        
+         <ons-back-button>Volver</ons-back-button>
+      </div>
+      <div class="center">Listas de Precios</div>
+    
+    </ons-toolbar>
+
+
+
+
+<div class="content">
+  
+ 
+
+          <ons-list class="items-list"  ng-controller="PriceListController"><!--ng-repeat="char in ['A','B']"-->
+          <!--<ons-list-header class="items-list-header">{{char}}</ons-list-header>-->
+          <ons-list-item class="items" ng-repeat="price in prices"  >
+            
+         
+          <ons-row>
+              <ons-col width="45px">
+              <span style="color:blue;">{{price.priceListName}}</span>
+              </ons-col>
+          
+            </ons-row>
+
+            <ons-row>
+                <ons-col class="items-client">
+            <span style="color:black;">{{price.price}}&nbsp{{price.currency}}</span>
+              </ons-col>
+            </ons-row>
+          </ons-list-item>
+        </ons-list>
+
+       
+
+
+</div>
+
+
+
+
+
+  </ons-page>
+<!--</ons-navigator>-->
+
+

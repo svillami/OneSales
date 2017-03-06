@@ -1,0 +1,117 @@
+
+
+
+
+<!--	<ons-navigator animation="node" title="Navigator" var="tabs">  ng-click="tabs.replacePage('indian.html');" -->
+
+
+<!--<ons-navigator title="Navigator" var="orderNav">-->
+<ons-page ng-controller="PriceController">
+
+ 
+   <ons-toolbar>
+      <div class="left">
+      <!-- <ons-toolbar-button  ng-click="orderNav.pushPage('home.html', { animation: 'slide' });">
+
+         <!-- <ons-icon icon="fa-chevron-left" style="font-size: 32px; width: 1em"> 
+        </ons-toolbar-button>-->
+        
+         <ons-back-button></ons-back-button>
+      </div>
+      <div class="center">Lista de Precios</div>
+    
+    </ons-toolbar>
+
+
+<div class="navigation-bar">
+        <div class="navigation-bar__center">
+
+            <!-- segment control -->
+            <div class="button-bar" style="width:200px; margin:8px auto 0;">
+              <div class="button-bar__item" ng-click="showItemsDiv();" >
+                  <input type="radio" name="navi-segment-a"  checked >
+                  <div class="button-bar__button" >Articulos</div>
+              </div>
+
+              <div class="button-bar__item" ng-click="showFiltrosDiv();">
+                  <input type="radio" name="navi-segment-a" >
+                  <div class="button-bar__button">Filtros</div>
+              </div>
+            </div>
+
+          </div>
+</div>
+
+<div class="content" ng-show="itemsDiv">
+  
+  <div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <input type="search" ng-model="query" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Buscar">
+
+          </div>
+ </div>
+
+          <ons-list class="items-list"  ><!--ng-repeat="char in ['A','B']"-->
+          <!--<ons-list-header class="items-list-header">{{char}}</ons-list-header>-->
+          <ons-list-item class="items"   ng-repeat="item in items | filter:query | orderBy: 'itemName'"  ng-click="showDetail($index)">
+            <ons-row>
+          <span style="color:blue;">{{item.itemCode}}</span>&nbsp-&nbsp{{item.itemName}}
+          </ons-row>
+          <ons-row>
+         <div style="text-align: center;">
+            <span style="color:blue;">{{item.price}} Bs</span>
+            </div>
+          </ons-row>
+           <!-- <ons-row>
+              <ons-col width="45px">
+               {{item.itemCode}}
+              </ons-col>
+              <ons-col class="items-client">
+                &nbsp &nbsp-
+{{item.itemName}}
+              </ons-col>
+            </ons-row>-->
+          </ons-list-item>
+        </ons-list>
+
+       
+
+
+</div>
+
+<div ng-show="filtros" class="ng-cloak">  <!--hidden="true" -->
+  <br>
+
+
+
+
+<ons-list  modifier="inset"  >
+       
+  <ons-list-item  > 
+         <span style="color:blue">Filtrar por Cliente:
+         </span>
+       
+         </span>
+     <ons-switch modifier="list-item" ng-model="checkGroup" ng-change="activarFiltroCliente();"></ons-switch>
+
+
+    </ons-list-item>
+
+        <ons-list-item modifier="chevron"  ng-show="checkGroup" ng-click="goToSelectBPFilter();" > 
+<ons-row>
+              <span style="color:blue">Cliente: <span style="color:black">{{cardName}}</span></span>
+<input type="text" class="text-input--transparent"  ng-show="false" style="width: 100%" ng-model="cardName" ng-value="{{getFilters()}}"/>
+
+ </ons-row>
+</ons-list-item>
+</ons-list>
+</div>
+
+
+
+
+  </ons-page>
+<!--</ons-navigator>-->
+
+

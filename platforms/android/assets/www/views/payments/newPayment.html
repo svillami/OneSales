@@ -1,0 +1,135 @@
+<body >
+
+<script>
+ 
+</script>
+
+<ons-page ng-controller="PaymentsController">
+
+
+
+   <ons-toolbar > 
+      <div class="left">
+         <ons-toolbar-button  ng-click="cancelPayment();">
+         Cancelar
+        </ons-toolbar-button>
+      </div>
+      <div class="center">Pago</div>
+       
+<div class="right">
+ 
+        <ons-toolbar-button  ng-click="savePayment();">
+         Listo
+        </ons-toolbar-button>
+
+      </div>
+
+    </ons-toolbar>
+<!--<button ng-click='sayHello(user)'>greet</button>
+ <input type="text"  placeholder="Usuario"  ng-model="user">
+-->
+
+
+ <ons-list >   <!--ng-controller="DialogController"-->
+       
+        <ons-list-item modifier="chevron"   ng-click="goToSelectBP();" >
+<ons-row>
+         <span style="color:blue">Cliente:</span>
+
+ </ons-row>
+<ons-row>
+              <ons-col class="order-client">
+                 <span style="color:black">{{ getParams().cardName }}</span><!--{{ getParams().cardName }}-->
+                
+              </ons-col>
+        </ons-row>
+
+			<!--<ons-row>
+              <ons-col class="order-client">
+                 
+              <span style="color:blue">Cliente:</span>
+              </ons-col>
+            </ons-row>
+<ons-row>
+              <ons-col class="order-client">
+                   IDA:
+              </ons-col>
+            </ons-row>-->
+
+        </ons-list-item>
+        <ons-list-item  >
+        <span style="color:blue">Fecha Doc:</span>
+  <input type="date" class="text-input--transparent" style="width: 100%" ng-model="DocDate"/>
+ 
+        </ons-list-item>
+  
+  <ons-list-item>
+        <span style="color:blue">
+          Pago a cuenta</span>
+          <ons-switch modifier="list-item" ng-model="check" ng-change="activarPagoCuenta();"></ons-switch>
+        </ons-list-item>
+ 
+        <ons-list-item> <span style="color:blue">Monto Pago a cuenta: <span style="color:black">{{  getParams().payNoDocSum }} </span></span>
+<input type="number" class="text-input text-input--transparent" ng-show="check"  ng-model="payNoDocSum" ng-change="addPayNoDocSum();"placeholder="Monto pago a cuenta" style="width: 100%">
+        </ons-list-item>
+
+       
+        <ons-list-item><span style="color:blue">Comentario:</span>
+<input type="text" class="text-input text-input--transparent" placeholder="Comentario" style="width: 100%">
+        </ons-list-item>
+ 
+ </ons-list>  
+  
+
+
+<br>
+
+
+ <ons-list > 
+<ons-list-item modifier="chevron" ng-click="goToPendingDocs();">
+ <span style="color:blue">Documentos a pagar:</span>
+<span style="color:black">{{ getParams().invoices.length }}&nbsp&nbsp{{ getParams().appliedInvoiceSum}} Bs</span>
+</ons-list-item>
+ </ons-list>
+
+<br>
+
+ <ons-list > 
+<ons-list-item modifier="chevron" ng-click="goToPaymentMeans();">
+ <span style="color:blue">Medios de Pago:</span>
+
+ <span style="color:blue">{{  getParams().docTotal }} 
+</span></ons-list-item>
+ </ons-list>
+
+<br>
+
+<div>
+ <ons-list > 
+<ons-list-item >
+ <span style="color:blue">Total a Pagar: <span style="color:black"> {{  getParams().pendingToPaid }}</span></span>
+</ons-list-item>
+<ons-list-item >
+ <span style="color:blue">Pagado:<span style="color:black"> {{  getParams().docTotal }}</span></span>
+</ons-list-item>
+
+
+ </ons-list>
+</div>
+
+
+  </ons-page>
+
+<!--
+<ons-template id="date.html" >
+ 
+  <ons-dialog var="dialog" modifier="date" cancelable>
+  
+   <div style="padding: 0 22px 22px 22px">
+  <input type="date" class="text-input" ng-model="inputDate"/>
+  </div>
+ </ons-dialog>
+
+</ons-template>-->
+
+</body>

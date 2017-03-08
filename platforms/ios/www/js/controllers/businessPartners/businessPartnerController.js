@@ -1,7 +1,7 @@
 var BusinessPartnerController=function ($scope, $http, $filter) {
 
     
-
+    summaryOrders();
 
     $scope.divBP = true;
     $scope.filtros = false;
@@ -39,6 +39,60 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
         salesNavigator.pushPage('views/payments/customerPayments.html', {businessPartner : selectedItem});
     };
     //End showPayments
+
+    // Begin summaryOrders
+    function summaryOrders() {
+
+      //Take the value chosen, in the previous option
+      var options = salesNavigator.getCurrentPage().options;
+      //$scope.cardName=options.businessPartner.cardName;
+
+        var queryFilter="SELECT * FROM ORDR T0 ";
+
+
+    if ($scope.cardName != null && typeof($scope.cardName) != 'undefined')
+    {
+
+      queryFilter = queryFilter +" WHERE T0.cardName='"+$scope.cardName+"'";
+
+    }
+
+        orders=new Array();
+           dataBase.transaction(function(tx) {
+
+              tx.executeSql(queryFilter, 
+                         [],
+                         function(tx, results)
+                         {
+                           
+                          var nLength = results.rows.length;
+               
+
+                           for(var c=0;c<nLength;c++)
+                           {
+
+                              var order = new Order();
+                              order.docEntry= results.rows.item(c).docEntry;
+                              order.cardCode=results.rows.item(c).cardCode;
+                              order.cardName=results.rows.item(c).cardName;
+                              order.baseImp=results.rows.item(c).baseImp;
+                              order.docTotal=results.rows.item(c).docTotal;
+                              order.docDate= results.rows.item(c).docDate;
+                              order.vatSum= results.rows.item(c).vatSum;
+                              orders.push(order);
+                          }
+                            $scope.orders=orders;
+                            $scope.$apply();
+            
+                         },
+                         function(tx, error)
+                         {
+                           alert(error.message); 
+                         }
+           );
+        });
+    }
+// End summaryOrders  
 
 
 function getData()  {

@@ -9,21 +9,24 @@
     <ons-list class="order-list" >  
         <ons-list-item class="order" modifier="chevron" ng-repeat="order in orders | filter:query | orderBy: 'docDate'"  ng-click="showDetail($index)">
             <ons-row>
-              <ons-col width="40px">
-              <span style="color:black">   {{order.docEntry}} </span>
-              </ons-col>
-              <ons-col class="order-client">
-                   <span style="color:#4282cc"> {{order.cardName}} </span>
-              </ons-col>
+                <ons-col width="40px">
+                <span style="color:black">   {{order.docEntry}} </span>
+                </ons-col>
+                <ons-col class="order-client">
+                     <span style="color:#4282cc"> {{order.cardName}} </span>
+                </ons-col>
             </ons-row>
 
-             <ons-row>
+            <ons-row>
               <ons-col width="40px">
-                  <span style="color:black"> {{order.docDate}}</span>
+                      <span style="color:black"> {{order.docDate}}</span>
               </ons-col>
-              <ons-col class="order-client">
-                  <span style="color:black"> {{order.docTotal}} Bs.</span>
-              </ons-col>
+            </ons-row>
+            
+             <ons-row>
+                <ons-col class="order-client">
+                    <span style="color:black"> {{order.docTotal}} Bs.</span>
+                </ons-col>
              </ons-row>
         </ons-list-item>
     </ons-list>

@@ -1,24 +1,20 @@
 var BusinessPartnerController=function ($scope, $http, $filter) {
 
-    
+    //Calling to load all arrays
     summaryOrders();
+    showInvoices();
+
+    $scope.summary= true;
+    $scope.details= false;
 
     $scope.divBP = true;
     $scope.filtros = false;
+
     $scope.showDetail = function(index) {
      var selectedItem = $scope.businessPartners[index];
-      //$data.selectedItem = selectedItem;
-
-      // alert('prueba');
-      //alert(selectedItem.itemCode);
-
-
-      //getData();
-
       salesNavigator.pushPage('views/bp/customerDetail.html', {businessPartner : selectedItem});
     };
 
-    
     //Begin showOrders
     $scope.showOrders = function(index) {
         var selectedItem = $scope.businessPartners[index];
@@ -40,7 +36,61 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
     };
     //End showPayments
 
-    // Begin summaryOrders
+
+    //Begin showDetailOrder to customerOrders
+    $scope.showDetailOrder= function(index){
+       var selectedItem = $scope.orders[index];
+       salesNavigator.pushPage('views/bp/orderCustomersDetails.html', {order : selectedItem});
+       $scope.ordersDiv=true;
+    
+    };
+    //End showDetailOrder
+
+    //Calling in orderCustomersDetails
+    $scope.showMoreDetails= function(index){
+        var selectedItem = $scope.ordersLine[index];
+         salesNavigator.pushPage('views/orders/orderMoreDetails.html', {orderLine : selectedItem});
+    };
+
+    //Calling the filters in OrderDetails.html to Summary
+    $scope.showOrderSummary= function(){
+          $scope.summary = true;
+          $scope.details=false;
+   
+          summaryOrders();
+    };
+
+  //Calling the filters in OrderDetails.html to Details
+  $scope.showOrderDetails= function(){
+      $scope.details=true;
+      $scope.summary = false;
+
+      fullOrderDetail();
+  };
+
+
+
+//Calling in orderCustomersDetails
+  $scope.getParams = function() { 
+    var options = salesNavigator.getCurrentPage().options;
+    return options.order; //options.businessPartner ;
+  };
+
+  //Calling in orderCustomersDetails
+  $scope.getParamsCustomers = function() { 
+    var options = salesNavigator.getCurrentPage().options;
+    return options.businessPartner; //options.businessPartner ;
+  };
+
+  // Begin getParamsOrderLine
+$scope.getParamsOrderLine = function() { 
+    
+    var options = salesNavigator.getCurrentPage().options;
+    return options.orderLine; 
+  };
+// End getParamsOrderLine
+
+// Begin summaryOrders
     function summaryOrders() {
 
       //Take the value chosen, in the previous option
@@ -50,12 +100,12 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
         var queryFilter="SELECT * FROM ORDR T0 ";
 
 
-    if ($scope.cardName != null && typeof($scope.cardName) != 'undefined')
-    {
+      if ($scope.cardName != null && typeof($scope.cardName) != 'undefined')
+      {
 
-      queryFilter = queryFilter +" WHERE T0.cardName='"+$scope.cardName+"'";
+        queryFilter = queryFilter +" WHERE T0.cardName='"+$scope.cardName+"'";
 
-    }
+      }
 
         orders=new Array();
            dataBase.transaction(function(tx) {
@@ -93,6 +143,111 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
         });
     }
 // End summaryOrders  
+
+
+// Begin showInvoices
+    function showInvoices() {
+
+      //Take the value chosen, in the previous option
+      var options = salesNavigator.getCurrentPage().options;
+      //$scope.cardName=options.businessPartner.cardName;
+
+        var queryFilter="SELECT * FROM OINV T0 ";
+
+
+      if ($scope.cardName != null && typeof($scope.cardName) != 'undefined')
+      {
+
+        queryFilter = queryFilter +" WHERE T0.cardName='"+$scope.cardName+"'";
+
+      }
+
+        invoices=new Array();
+           dataBase.transaction(function(tx) {
+
+              tx.executeSql(queryFilter, 
+                         [],
+                         function(tx, results)
+                         {
+                           
+                          var nLength = results.rows.length;
+               
+
+                           for(var c=0;c<nLength;c++)
+                           {
+
+                              var invoice = new Order();
+                              invoice.docEntry= results.rows.item(c).docEntry;
+                              order.cardCode=results.rows.item(c).cardCode;
+                              
+                              invoices.push(order);
+                          }
+                            $scope.invoices=invoices;
+                            $scope.$apply();
+            
+                         },
+                         function(tx, error)
+                         {
+                           alert(error.message); 
+                         }
+           );
+        });
+    }
+// End showInvoices
+
+// Begin fullOrderDetail
+function fullOrderDetail() {
+
+    //Take the value chosen, in the previous option
+    var options = salesNavigator.getCurrentPage().options;
+    $scope.docEntry=options.order.docEntry;
+   
+    var queryFilter="SELECT * FROM RDR1 T0";
+
+    if ($scope.docEntry != null && typeof($scope.docEntry) != 'undefined')
+    {
+
+      queryFilter = queryFilter +" WHERE T0.docEntry='"+$scope.docEntry+"'";
+
+    }
+
+    ordersLine=new Array();
+       dataBase.transaction(function(tx) {
+
+          tx.executeSql(queryFilter, 
+                     [],
+                     function(tx, results)
+                     {
+                       
+                      var nLength = results.rows.length;
+          
+                       for(var c=0;c<nLength;c++)
+                       {
+                          var orderLine = new OrderLine();
+                          orderLine.docEntry= results.rows.item(c).docEntry;
+                          orderLine.itemCode=results.rows.item(c).itemCode;
+                          orderLine.dscription=results.rows.item(c).dscription;
+                          orderLine.quantity=results.rows.item(c).quantity;
+                          orderLine.price=results.rows.item(c).price;
+                          orderLine.lineTotal= results.rows.item(c).lineTotal;
+                          orderLine.vatSum= results.rows.item(c).vatSum;
+                          ordersLine.push(orderLine);
+                      }
+            
+                        $scope.ordersLine=ordersLine;
+                        $scope.$apply();
+        
+                     },
+                     function(tx, error)
+                     {
+                       alert(error.message); 
+                     }
+       );
+    });
+}
+// End fullOrderDetail
+
+
 
 
 function getData()  {
@@ -237,21 +392,21 @@ function successResults(tx,results)
        for(var c=0;c<nLength;c++){
         
 		    // alert(results.rows.item(c).itemCode);
-		     var businessPartner = new BusinessPartner
-		    (results.rows.item(c).cardCode,
-		    results.rows.item(c).cardName,
-		    results.rows.item(c).licTradNum,
-		    results.rows.item(c).email,
-		    results.rows.item(c).phone1,
-        results.rows.item(c).phone2,
-        results.rows.item(c).balance,
-        results.rows.item(c).contactCode,
-        results.rows.item(c).contactName,
-        results.rows.item(c).paymentGroupNum,
-        results.rows.item(c).pymntGroup,
-        results.rows.item(c).slpCode,
-        results.rows.item(c).address,
-        results.rows.item(c).mailAddress);
+		     var businessPartner = new BusinessPartner();
+		    businessPartner.cardCode=results.rows.item(c).cardCode;
+		    businessPartner.cardName=results.rows.item(c).cardName;
+		    businessPartner.licTradNum=results.rows.item(c).licTradNum;
+		    businessPartner.email=results.rows.item(c).email;
+		    businessPartner.phone1=results.rows.item(c).phone1;
+        businessPartner.phone2=results.rows.item(c).phone2;
+        businessPartner.balance=results.rows.item(c).balance;
+        businessPartner.contactCode=results.rows.item(c).contactCode;
+        businessPartner.contactName=results.rows.item(c).contactName;
+        businessPartner.paymentGroupNum=results.rows.item(c).paymentGroupNum;
+        businessPartner.pymntGroup=results.rows.item(c).pymntGroup;
+        businessPartner.slpCode=results.rows.item(c).slpCode;
+        businessPartner.address=results.rows.item(c).address;
+        businessPartner.mailAddress=results.rows.item(c).mailAddress;
 		     // alert(item.itemCode+ ' ' + item.itemName +'stock '+results.rows.item(c).stock);
 			  businessPartners.push(businessPartner);
 	
@@ -261,6 +416,7 @@ function successResults(tx,results)
     $scope.$apply();
     
 }
+
 
 function errorInQuery(tx,error)
 {

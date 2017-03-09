@@ -5,6 +5,10 @@
                 <div class="center">Documentos</div>
             </ons-toolbar>
 
+              <ons-list-item ng-controller="BusinessPartnerController">
+                          Cliente: {{getParamsCustomers().cardName}}
+              </ons-list-item>
+
             <ons-list modifier="inset" style="margin-top: 10px"  >
                   <ons-list-item modifier="chevron" ng-click="showOrders($index)">
                         Pedidos

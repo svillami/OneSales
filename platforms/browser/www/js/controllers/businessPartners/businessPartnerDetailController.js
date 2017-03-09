@@ -1,5 +1,5 @@
 var BusinessPartnerDetailController=function ($scope, $http, $filter) {
-
+ 
 $scope.getParams = function() { 
     
 
@@ -7,8 +7,8 @@ $scope.getParams = function() {
 
 //alert(options.item.itemCode);
     return options.businessPartner ;
-  };
 
+}
 
 $scope.showPriceList = function() {
      //var selectedItem = $scope.items[index];

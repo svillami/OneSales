@@ -1,0 +1,137 @@
+<ons-page ng-controller="BusinessPartnerController">
+
+<!-- Lista de pedidos con resumen y detalles -->
+  <ons-toolbar>
+      <div class="left"><ons-back-button>Volver</ons-back-button></div>
+      <div class="center">Resumen</div>
+  </ons-toolbar>
+
+<!-- Buscador -->
+  <div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <!-- segment control -->
+            <div class="button-bar" style="width:200px; margin:8px auto 0;">
+              <div class="button-bar__item" ng-click="showOrderSummary();">
+                  <input type="radio" name="navi-segment-a"  checked >
+                  <div class="button-bar__button" >Resumen</div>
+              </div>
+
+              <div class="button-bar__item" ng-click="showInvoiceDetails();">
+                  <input type="radio" name="navi-segment-a" >
+                  <div class="button-bar__button">Detalle</div>
+              </div>
+            </div>
+
+          </div>
+</div>
+
+<!-- Summary-->
+ <div class="content" ng-show="summary">       
+
+    <ons-list class="order"  modifier="inset" style="margin-top: 10px" ng-controller="BusinessPartnerController" >
+          <ons-list-item class="item">
+              <ons-row>
+                  <ons-col width="60px">
+                      <div class="item-thum"></div>
+                  </ons-col>
+                  <ons-col>
+                      <header>
+                          <span class="item-title"></span>
+                        
+                      </header>
+                      <p class="item-desc"> {{getParamsInvoices().cardName}}</p>
+                  </ons-col>
+              </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Codigo de la Factura:</span>
+
+            </ons-row>
+            <ons-row>
+                {{ getParamsInvoices().cardCode }}
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Comentarios:</span>
+
+            </ons-row>
+            <ons-row>
+                {{ getParamsInvoices().comments}}
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Fecha:</span>
+
+            </ons-row>
+            <ons-row>
+                {{ getParamsInvoices().docDate}}
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Base Imponible:</span>
+
+            </ons-row>
+            <ons-row>
+                {{ getParamsInvoices().baseImp }} Bs.
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Impuesto:</span>
+
+            </ons-row>
+            <ons-row>
+                {{ getParamsInvoices().VatSum }} Bs.
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                <span style="color:blue">Monto Total:</span>
+                  
+            </ons-row>
+            <ons-row>
+               {{ getParamsInvoices().docTotal }} Bs.
+            </ons-row>
+          </ons-list-item>
+    </ons-list>
+  </div>
+
+
+  <!-- Details-->
+ <div class="content" ng-show="detailsInvoice"> 
+ 
+     <div class="navigation-bar">
+              <div class="navigation-bar__center">
+
+                <input type="search" class="search-input" ng-model="query" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Buscar">
+
+              </div>
+     </div>
+
+    <ons-list class="order-list" ng-controller="BusinessPartnerController" > 
+       <ons-list-item class="documentLine" modifier="chevron" ng-repeat="documentLine in documentsLine | filter:query"  ng-click="showMoreDetailsInvoice($index)">
+
+            <ons-row>
+                <span style="color:#4282cc">{{documentLine.dscription}} </span>
+            </ons-row>
+            <ons-row>
+                <span style="color:black"> Total: {{documentLine.lineTotal}} Bs. </span>
+            </ons-row>
+
+        </ons-list-item>
+      </ons-list>
+
+ </div>
+
+</ons-page>

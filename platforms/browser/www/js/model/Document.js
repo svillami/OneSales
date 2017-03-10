@@ -9,7 +9,7 @@ function Document (){
     this.baseImp=0;
     this.docTotal=0;
     this.docStatus;
-    this.vatSum=0;
+    this.VatSum=0;
     this.discount=0;
     this.discountPercent=0;
     this.comments="";
@@ -18,5 +18,6 @@ function Document (){
     this.paidToDate=0;
     this.pending=0;
     this.appliedSum=0;
+    this.docTotal=0;
     //}
 }

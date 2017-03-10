@@ -7,7 +7,8 @@
 
     
     <ons-list class="order-list" >  
-        <ons-list-item class="order" modifier="chevron" ng-repeat="order in orders | filter:query"  ng-click="showDetailOrder($index)">
+        <ons-list-item class="order" modifier="chevron" ng-repeat="order in orders"  ng-click="showDetailOrder($index)">
+            
             <ons-row>
                 <ons-col width="40px">
                 <span style="color:black">   {{order.docEntry}} </span>
@@ -18,16 +19,19 @@
             </ons-row>
 
             <ons-row>
-              <ons-col width="40px">
-                      <span style="color:black"> {{order.docDate}}</span>
+              <ons-col class="order-client">
+                      <span style="color:#4282cc"> Fecha:</span>
+                      <span style="color:black">{{order.docDate}}</span>
               </ons-col>
             </ons-row>
             
              <ons-row>
                 <ons-col class="order-client">
-                    <span style="color:black"> {{order.docTotal}} Bs.</span>
+                    <span style="color:#4282cc"> Total:</span>
+                    <span style="color:black">{{order.docTotal}} Bs.</span>
                 </ons-col>
              </ons-row>
+
         </ons-list-item>
     </ons-list>
 

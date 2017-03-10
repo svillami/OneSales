@@ -2,10 +2,12 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
 
     //Calling to load all arrays
     summaryOrders();
-    showInvoices();
+    ShowCustomerInvoices();
+    //showCustomersPayments();
 
     $scope.summary= true;
     $scope.details= false;
+    $scope.detailsInvoice=false;
 
     $scope.divBP = true;
     $scope.filtros = false;
@@ -46,18 +48,32 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
     };
     //End showDetailOrder
 
+
+    //Begin showDetailInvoices to customerInvoices
+    $scope.showDetailInvoices= function(index){
+       var selectedItem = $scope.invoices[index];
+       salesNavigator.pushPage('views/bp/invoiceCustomersDetails.html', {invoice : selectedItem});
+       $scope.ordersDiv=true;
+    
+    };
+    //End showDetailInvoices
+
     //Calling in orderCustomersDetails
     $scope.showMoreDetails= function(index){
         var selectedItem = $scope.ordersLine[index];
          salesNavigator.pushPage('views/orders/orderMoreDetails.html', {orderLine : selectedItem});
     };
 
-    //Calling the filters in OrderDetails.html to Summary
+    //Calling the filters in OrderDetails.html and invoiceCustomersDetails to Summary
     $scope.showOrderSummary= function(){
           $scope.summary = true;
           $scope.details=false;
-   
+          $scope.detailsInvoice=false;
+          
+          //Calling Orders
           summaryOrders();
+          //Calling Invoices
+          ShowCustomerInvoices();
     };
 
   //Calling the filters in OrderDetails.html to Details
@@ -68,13 +84,26 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
       fullOrderDetail();
   };
 
+  //Calling the filters in invoceCustomersDetails.html to DetailsInvoice
+  $scope.showInvoiceDetails= function(){
+      $scope.detailsInvoice=true;
+      $scope.summary = false;
 
+      
+      fullInvoiceDetail();
+  };
 
 //Calling in orderCustomersDetails
   $scope.getParams = function() { 
     var options = salesNavigator.getCurrentPage().options;
-    return options.order; //options.businessPartner ;
+    return options.order;
   };
+
+ //Calling in invoiceCustomersDetails
+  $scope.getParamsInvoices = function() { 
+    var options = salesNavigator.getCurrentPage().options;
+    return options.invoice;
+  }; 
 
   //Calling in orderCustomersDetails
   $scope.getParamsCustomers = function() { 
@@ -83,12 +112,19 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
   };
 
   // Begin getParamsOrderLine
-$scope.getParamsOrderLine = function() { 
+$scope.getParamsDocumentLine = function() { 
     
     var options = salesNavigator.getCurrentPage().options;
-    return options.orderLine; 
+    return options.documentLine; 
   };
 // End getParamsOrderLine
+
+// Begin showMoreDetailsInvoice
+$scope.showMoreDetailsInvoice= function(index){
+      var selectedItem = $scope.documentsLine[index];
+      salesNavigator.pushPage('views/bp/invoiceMoreDetails.html', {documentLine : selectedItem});
+    };
+//End showMoreDetailsInvoice    
 
 // Begin summaryOrders
     function summaryOrders() {
@@ -146,7 +182,67 @@ $scope.getParamsOrderLine = function() {
 
 
 // Begin showInvoices
-    function showInvoices() {
+    function ShowCustomerInvoices() {
+
+      //Take the value chosen, in the previous option
+      var options = salesNavigator.getCurrentPage().options;
+      //$scope.cardName=options.businessPartner.cardName;
+
+        var queryFilter="SELECT * FROM OINV T0 ";
+
+
+      if ($scope.cardName != null && typeof($scope.cardName) != 'undefined')
+      {
+
+        queryFilter = queryFilter +" WHERE T0.cardName='"+$scope.cardName+"'";
+
+      }
+
+        invoices=new Array();
+           dataBase.transaction(function(tx) {
+
+              tx.executeSql(queryFilter, 
+                         [],
+                         function(tx, results)
+                         {
+                           
+                          var nLength = results.rows.length;
+               
+
+                           for(var c=0;c<nLength;c++)
+                           {
+                              var invoice = new Document();
+                              invoice.docEntry= results.rows.item(c).docEntry;
+                              invoice.cardCode= results.rows.item(c).cardCode;
+                              invoice.cardName= results.rows.item(c).cardName;
+                              invoice.docDate=  results.rows.item(c).docDate;
+                              invoice.taxDate=  results.rows.item(c).taxDate;
+                              invoice.discount= results.rows.item(c).discount;
+                              invoice.discountPercent= results.rows.item(c).discountPercent;
+                              invoice.comments= results.rows.item(c).comments;
+                              invoice.paidToDate= results.rows.item(c).paidToDate;
+                              invoice.docTotal= results.rows.item(c).docTotal;
+                              invoice.VatSum= results.rows.item(c).VatSum;
+                              invoice.baseImp= (invoice.docTotal-invoice.VatSum);
+                              
+                              invoices.push(invoice);
+                          }
+                            $scope.invoices=invoices;
+                            $scope.$apply();
+            
+                         },
+                         function(tx, error)
+                         {
+                           alert(error.message); 
+                         }
+           );
+        });
+    }
+// End showInvoices
+
+
+// Begin showCustomersPayments
+  /*  function showCustomersPayments() {
 
       //Take the value chosen, in the previous option
       var options = salesNavigator.getCurrentPage().options;
@@ -176,11 +272,11 @@ $scope.getParamsOrderLine = function() {
                            for(var c=0;c<nLength;c++)
                            {
 
-                              var invoice = new Order();
+                              var invoice = new Document();
                               invoice.docEntry= results.rows.item(c).docEntry;
-                              order.cardCode=results.rows.item(c).cardCode;
                               
-                              invoices.push(order);
+                              
+                              invoices.push(invoice);
                           }
                             $scope.invoices=invoices;
                             $scope.$apply();
@@ -192,8 +288,9 @@ $scope.getParamsOrderLine = function() {
                          }
            );
         });
-    }
-// End showInvoices
+    } */
+// End showCustomersPayments
+
 
 // Begin fullOrderDetail
 function fullOrderDetail() {
@@ -248,6 +345,62 @@ function fullOrderDetail() {
 // End fullOrderDetail
 
 
+// Begin fullInvoiceDetail
+function fullInvoiceDetail() {
+
+//debugger;
+    //Take the value chosen, in the previous option
+    var options = salesNavigator.getCurrentPage().options;
+    $scope.docEntry=options.invoice.docEntry;
+
+    var queryFilter="SELECT * FROM INV1 T0";
+
+    if ($scope.docEntry != null && typeof($scope.docEntry) != 'undefined')
+    {
+
+      queryFilter = queryFilter +" WHERE T0.docEntry='"+$scope.docEntry+"'";
+
+    }
+
+    documentsLine=new Array();
+       dataBase.transaction(function(tx) {
+
+          tx.executeSql(queryFilter, 
+                     [],
+                     function(tx, results)
+                     {
+                       
+                      var nLength = results.rows.length;
+          
+                       for(var c=0;c<nLength;c++)
+                       {
+                          var documentLine = new DocumentLine();
+                          documentLine.itemCode= results.rows.item(c).itemCode;
+                          documentLine.docEntry= results.rows.item(c).docEntry;
+                          documentLine.lineId= results.rows.item(c).lineId;
+                          documentLine.dscription= results.rows.item(c).dscription;
+                          documentLine.quantity= results.rows.item(c).quantity;
+                          documentLine.taxCode= results.rows.item(c).taxCode;
+                          documentLine.price= results.rows.item(c).price;
+                          documentLine.lineTotal= results.rows.item(c).lineTotal;
+                          documentLine.vatSum= results.rows.item(c).vatSum;
+                          documentLine.comments= results.rows.item(c).comments;
+                          
+                          documentsLine.push(documentLine);
+                      }
+            
+                        $scope.documentsLine=documentsLine;
+                        $scope.$apply();
+        
+                     },
+                     function(tx, error)
+                     {
+                       alert(error.message); 
+                     }
+       );
+    });
+}
+// End fullInvoiceDetail
 
 
 function getData()  {

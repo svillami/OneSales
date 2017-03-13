@@ -16,7 +16,7 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
      var selectedItem = $scope.businessPartners[index];
       salesNavigator.pushPage('views/bp/customerDetail.html', {businessPartner : selectedItem});
     };
-
+ 
     //Begin showOrders
     $scope.showOrders = function(index) {
         var selectedItem = $scope.businessPartners[index];
@@ -108,7 +108,7 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
   //Calling in orderCustomersDetails
   $scope.getParamsCustomers = function() { 
     var options = salesNavigator.getCurrentPage().options;
-    return options.businessPartner; //options.businessPartner ;
+    return options.businessPartner; 
   };
 
   // Begin getParamsOrderLine
@@ -158,12 +158,19 @@ $scope.showMoreDetailsInvoice= function(index){
                            {
 
                               var order = new Order();
+
+                              var date = results.rows.item(c).docDate;
+                              var anio = date.substring(4,0);
+                              var mes=  date.substring(6,4);
+                              var dia= date.substring(8,6); 
+                              var concat = (anio+"-"+ mes +"-"+ dia);
+
                               order.docEntry= results.rows.item(c).docEntry;
                               order.cardCode=results.rows.item(c).cardCode;
                               order.cardName=results.rows.item(c).cardName;
                               order.baseImp=results.rows.item(c).baseImp;
                               order.docTotal=results.rows.item(c).docTotal;
-                              order.docDate= results.rows.item(c).docDate;
+                              order.docDate= concat;
                               order.vatSum= results.rows.item(c).vatSum;
                               orders.push(order);
                           }
@@ -212,10 +219,17 @@ $scope.showMoreDetailsInvoice= function(index){
                            for(var c=0;c<nLength;c++)
                            {
                               var invoice = new Document();
+
+                              var date = results.rows.item(c).docDate;
+                              var anio = date.substring(4,0);
+                              var mes=  date.substring(6,4);
+                              var dia= date.substring(8,6); 
+                              var concat = (anio+"-"+ mes +"-"+ dia);
+
                               invoice.docEntry= results.rows.item(c).docEntry;
                               invoice.cardCode= results.rows.item(c).cardCode;
                               invoice.cardName= results.rows.item(c).cardName;
-                              invoice.docDate=  results.rows.item(c).docDate;
+                              invoice.docDate=  concat;
                               invoice.taxDate=  results.rows.item(c).taxDate;
                               invoice.discount= results.rows.item(c).discount;
                               invoice.discountPercent= results.rows.item(c).discountPercent;
@@ -348,7 +362,6 @@ function fullOrderDetail() {
 // Begin fullInvoiceDetail
 function fullInvoiceDetail() {
 
-//debugger;
     //Take the value chosen, in the previous option
     var options = salesNavigator.getCurrentPage().options;
     $scope.docEntry=options.invoice.docEntry;

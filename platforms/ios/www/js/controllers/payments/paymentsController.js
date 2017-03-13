@@ -74,6 +74,15 @@ $scope.goToSelectBPFilter = function() {
   
   };
 
+  //Begin showDetailPayments
+    $scope.showDetailPayments= function(index){
+       var selectedItem = $scope.payments[index];
+       salesNavigator.pushPage('views/bp/paymentCustomersDetails.html', {payment : selectedItem});
+       //$scope.ordersDiv=true;
+    
+    };
+    //End showDetailPayments
+
 
  $scope.activarFiltroCliente = function(){
 
@@ -639,10 +648,15 @@ var payments=new Array();
     
                     // alert(results.rows.item(c).onHand);
                     var payment = new Payment();
+                    var date = results.rows.item(c).docDate;
+                    var anio = date.substring(4,0);
+                    var mes=  date.substring(6,4);
+                    var dia= date.substring(8,6); 
+                    var concat = (anio+"-"+ mes +"-"+ dia);
                     payment.docEntry= results.rows.item(c).docEntry;
                     payment.cardCode=results.rows.item(c).cardCode;
                     payment.cardName=results.rows.item(c).cardName;
-                    payment.docDate=results.rows.item(c).docDate;
+                    payment.docDate=concat;
                     payment.docTotal=results.rows.item(c).docTotal;
            //          alert(results.rows.item(c).isCommited);
                     payments.push(payment);

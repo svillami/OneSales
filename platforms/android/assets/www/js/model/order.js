@@ -8,7 +8,7 @@ function Order (){
     this.taxDate; 
     this.baseImp=0;
     this.docTotal=0;
-    this.vatSum=0;
+    this.VatSum=0;
     this.discount=0;
     this.discountPercent=0;
     this.qtyItems=0;

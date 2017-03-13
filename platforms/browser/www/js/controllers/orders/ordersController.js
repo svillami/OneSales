@@ -245,6 +245,7 @@ orders=new Array();
                     order.cardName=results.rows.item(c).cardName;
                     order.baseImp=results.rows.item(c).baseImp;
                     order.docTotal=results.rows.item(c).docTotal;
+                    order.VatSum= results.rows.item(c).VatSum;
            //          alert(results.rows.item(c).isCommited);
                      orders.push(order);
   
@@ -271,12 +272,8 @@ orders=new Array();
 
 $scope.getParams = function() { 
     
-
     var options = salesNavigator.getCurrentPage().options;
-    //$scope.cardName=options.order.cardName;
-     //alert(options.order.lines.length);
-    //alert(options.order.docDate);
-    return options.order; //options.businessPartner ;
+    return options.order; 
   };
 
 
@@ -306,7 +303,7 @@ function summaryOrders() {
                           order.baseImp=results.rows.item(c).baseImp;
                           order.docTotal=results.rows.item(c).docTotal;
                           order.docDate= results.rows.item(c).docDate;
-                          order.vatSum= results.rows.item(c).vatSum;
+                          order.VatSum= results.rows.item(c).VatSum;
                           orders.push(order);
                       }
                         $scope.orders=orders;
@@ -669,22 +666,26 @@ orders=new Array();
 
                    for(var c=0;c<nLength;c++)
                    {
-                   
-                    // alert(results.rows.item(c).onHand);
                     var order = new Order();
+
+                    var date = results.rows.item(c).docDate;
+                    var anio = date.substring(4,0);
+                    var  mes=  date.substring(6,4);
+                    var dia= date.substring(8,6); 
+                    var concat = (anio+"-"+ mes +"-"+ dia);
+
                     order.docEntry= results.rows.item(c).docEntry;
                     order.cardCode=results.rows.item(c).cardCode;
-                     order.cardName=results.rows.item(c).cardName;
-                         order.baseImp=results.rows.item(c).baseImp;
-                              order.docTotal=results.rows.item(c).docTotal;
-           //          alert(results.rows.item(c).isCommited);
-                     orders.push(order);
+                    order.cardName=results.rows.item(c).cardName;
+                    order.docDate= concat;
+                    order.docTotal=results.rows.item(c).docTotal;
+                    order.VatSum= results.rows.item(c).VatSum;
+                    order.baseImp= (order.docTotal - order.VatSum);
+                    orders.push(order);
   
                   }
-        
-       // alert(wareHousesStock.length)
+      
                 $scope.orders=orders;
-            // alert($scope.whsStockList.length);
                 $scope.$apply();
     
                  },

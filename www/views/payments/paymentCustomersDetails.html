@@ -1,4 +1,4 @@
-<ons-page ng-controller="OrdersController">
+<ons-page ng-controller="BusinessPartnerController">
 
 <!-- Lista de pedidos con resumen y detalles -->
   <ons-toolbar>
@@ -12,15 +12,22 @@
 
             <!-- segment control -->
             <div class="button-bar" style="width:200px; margin:8px auto 0;">
-              <div class="button-bar__item" ng-click="showOrderSummary();">
-                  <input type="radio" name="navi-segment-a"  checked >
-                  <div class="button-bar__button" >Resumen</div>
-              </div>
 
-              <div class="button-bar__item" ng-click="showOrderDetails();">
-                  <input type="radio" name="navi-segment-a" >
-                  <div class="button-bar__button">Detalle</div>
-              </div>
+                <div class="button-bar__item" ng-click="showOrderSummary();">
+                    <input type="radio" name="navi-segment-a"  checked >
+                    <div class="button-bar__button" >Resumen</div>
+                </div>
+
+                <div class="button-bar__item" ng-click="showInvoiceDetails();">
+                    <input type="radio" name="navi-segment-a" >
+                    <div class="button-bar__button">Detalle</div>
+                </div>
+
+                <div class="button-bar__item" ng-click="showPaymentMethods();">
+                    <input type="radio" name="navi-segment-a" >
+                    <div class="button-bar__button">Medios de Pago</div>
+                </div>
+
             </div>
 
           </div>
@@ -29,7 +36,7 @@
 <!-- Summary-->
  <div class="content" ng-show="summary">       
 
-    <ons-list class="order"  modifier="inset" style="margin-top: 10px" ng-controller="OrdersController" >
+    <ons-list class="order"  modifier="inset" style="margin-top: 10px" ng-controller="BusinessPartnerController" >
           <ons-list-item class="item">
               <ons-row>
                   <ons-col width="60px">
@@ -40,18 +47,28 @@
                           <span class="item-title"></span>
                         
                       </header>
-                      <p class="item-desc"> {{getParams().cardName}}</p>
+                      <p class="item-desc"> {{getParamsInvoices().cardName}}</p>
                   </ons-col>
               </ons-row>
           </ons-list-item>
 
           <ons-list-item >
             <ons-row>
-                 <span style="color:blue">Codigo del Articulo:</span>
+                 <span style="color:blue">Codigo de la Factura:</span>
 
             </ons-row>
             <ons-row>
-                {{ getParams().cardCode }}
+                {{ getParamsInvoices().cardCode }}
+            </ons-row>
+          </ons-list-item>
+
+          <ons-list-item >
+            <ons-row>
+                 <span style="color:blue">Comentarios:</span>
+
+            </ons-row>
+            <ons-row>
+                {{ getParamsInvoices().comments}}
             </ons-row>
           </ons-list-item>
 
@@ -61,7 +78,7 @@
 
             </ons-row>
             <ons-row>
-                {{ getParams().docDate }}
+                {{ getParamsInvoices().docDate}}
             </ons-row>
           </ons-list-item>
 
@@ -71,7 +88,7 @@
 
             </ons-row>
             <ons-row>
-                {{ getParams().baseImp}} Bs.
+                {{ getParamsInvoices().baseImp }} Bs.
             </ons-row>
           </ons-list-item>
 
@@ -81,8 +98,7 @@
 
             </ons-row>
             <ons-row>
-            
-                {{ getParams().VatSum }} Bs.
+                {{ getParamsInvoices().VatSum }} Bs.
             </ons-row>
           </ons-list-item>
 
@@ -92,7 +108,7 @@
                   
             </ons-row>
             <ons-row>
-               {{ getParams().docTotal }} Bs.
+               {{ getParamsInvoices().docTotal }} Bs.
             </ons-row>
           </ons-list-item>
     </ons-list>
@@ -100,7 +116,7 @@
 
 
   <!-- Details-->
- <div class="content" ng-show="details"> 
+ <div class="content" ng-show="detailsInvoice"> 
  
      <div class="navigation-bar">
               <div class="navigation-bar__center">
@@ -110,15 +126,14 @@
               </div>
      </div>
 
-    <ons-list class="order-list" ng-controller="OrdersController" > 
-       <ons-list-item class="orderLine" modifier="chevron" ng-repeat="orderLine in ordersLine | filter:query"  ng-click="showMoreDetails($index)" ><!--ng-repeat="i in [1,2,3,4,5]">-->
-            <!-- <span style="color:blue;">{{order.docEntry}}</span>&nbsp-&nbsp{{order.cardName}}&nbsp-&nbsp{{order.docTotal}}&nbsp-&nbsp{{order.docDate}} -->
+    <ons-list class="order-list" ng-controller="BusinessPartnerController" > 
+       <ons-list-item class="documentLine" modifier="chevron" ng-repeat="documentLine in documentsLine | filter:query"  ng-click="showMoreDetailsInvoice($index)">
 
             <ons-row>
-                <span style="color:#4282cc">{{orderLine.dscription}} </span>
+                <span style="color:#4282cc">{{documentLine.dscription}} </span>
             </ons-row>
             <ons-row>
-                <span style="color:black"> Total: {{orderLine.lineTotal}} Bs. </span>
+                <span style="color:black"> Total: {{documentLine.lineTotal}} Bs. </span>
             </ons-row>
 
         </ons-list-item>

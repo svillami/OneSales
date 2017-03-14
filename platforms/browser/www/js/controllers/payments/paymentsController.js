@@ -2,6 +2,11 @@ var  PaymentsController=function ($scope, $http, $filter) {
  
 $scope.divPayments = true;
 $scope.filtros = false;
+
+$scope.summary = true;
+$scope.details=false;
+$scope.paymentmethods=false;
+
 var filters=new Filter();
 filters.docDateFrom=new Date();
 filters.docDateTo=new  Date();
@@ -67,6 +72,35 @@ $scope.showFiltrosDiv = function(){
      filtersPayments(); 
     };
 
+  //CalliESTEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+  $scope.showOrderSummary= function(){
+        $scope.summary = true;
+        $scope.details=false;
+        $scope.paymentmethods=false;  
+  };    
+
+  //CalliESTEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+  $scope.showInvoiceDetails= function(){
+      $scope.summary = false;
+      $scope.details=true;
+      $scope.paymentmethods=false;
+
+      fullInvoiceDetail();
+  };
+
+  //CalliESTEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+  $scope.showPaymentMethods= function(){
+      $scope.summary = false;
+      $scope.details=false;
+      $scope.paymentmethods=true;
+  };
+
+  //Calling in invoiceCustomersDetails
+  $scope.getParamsPayments = function() { 
+    var options = salesNavigator.getCurrentPage().options;
+    return options.payment;
+  }; 
+
 $scope.goToSelectBPFilter = function() { 
     
    
@@ -77,7 +111,7 @@ $scope.goToSelectBPFilter = function() {
   //Begin showDetailPayments
     $scope.showDetailPayments= function(index){
        var selectedItem = $scope.payments[index];
-       salesNavigator.pushPage('views/bp/paymentCustomersDetails.html', {payment : selectedItem});
+       salesNavigator.pushPage('views/payments/paymentCustomersDetails.html', {payment : selectedItem});
        //$scope.ordersDiv=true;
     
     };
@@ -658,6 +692,11 @@ var payments=new Array();
                     payment.cardName=results.rows.item(c).cardName;
                     payment.docDate=concat;
                     payment.docTotal=results.rows.item(c).docTotal;
+                    payment.cashSum= results.rows.item(c).cashSum;
+                    payment.transferSum= results.rows.item(c).transferSum;
+                    payment.checkSum= results.rows.item(c).checkSum;
+
+                
            //          alert(results.rows.item(c).isCommited);
                     payments.push(payment);
   

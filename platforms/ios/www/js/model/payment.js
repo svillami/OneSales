@@ -16,8 +16,8 @@ function Payment (){
      this.transferRef;
     this.bankTransferAcct;
     this.bankCheckAcct;
-    this.cashSum;
-    this.transfSum=0;
+    this.cashSum=0;
+    this.transferSum=0;
     this.checkSum=0;
     this.payNoDoc;
     this.payNoDocSum=0;

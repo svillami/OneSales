@@ -54,7 +54,7 @@
 
           <ons-list-item >
             <ons-row>
-                 <span style="color:blue">Codigo del pago:</span>
+                 <span style="color:blue">Codigo del cliente:</span>
 
             </ons-row>
             <ons-row>
@@ -123,27 +123,35 @@
 
 
   <!--PaymentMethods-->
- <div class="content" ng-show="paymentmethods"> 
+ <div class="content" ng-show="paymentmethods" > 
  
-    <ons-list class="order-list"> 
-       <ons-list-item class="payments">
+            <ons-list modifier="inset" style="margin-top: 10px"  >
+                  <ons-list-item >
+                      <span style="color:#4282cc"> Medio de pago:   </span>
+                      <span style="color:black">   {{getParamsPayments().methods}} </span>
+                  </ons-list-item>
 
-            <ons-row>
-                <span style="color:#4282cc"> Efectivo:  </span>
-                <span style="color:black">   {{getParamsPayments().cashSum}} Bs. </span>
-            </ons-row>
-            <ons-row>
-                <span style="color:#4282cc"> Transferencia:  </span>
-                <span style="color:black">   {{getParamsPayments().transferSum}} Bs. </span>
-            </ons-row>
-            <ons-row>
-                <span style="color:#4282cc"> Cheque:  </span>
-                <span style="color:black">   {{getParamsPayments().checkSum}} Bs. </span>
-            </ons-row>
+                  <ons-list-item >
+                      <span style="color:#4282cc"> Fecha:   </span>
+                      <span style="color:black">   {{getParamsPayments().methodsDate}} </span>
+                  </ons-list-item>
+
+                  <ons-list-item > 
+                      <span style="color:#4282cc"> Acct:   </span>
+                      <span style="color:black">   {{getParamsPayments().methodsAcct}} </span>
+                  </ons-list-item>
+
+                  <ons-list-item > 
+                      <span style="color:#4282cc"> Referencia:   </span>
+                      <span style="color:black">   {{getParamsPayments().methodsRef}} </span>
+                  </ons-list-item>
+
+                  <ons-list-item > 
+                      <span style="color:#4282cc"> Monto:   </span>
+                      <span style="color:black">   {{getParamsPayments().methodsTotal}}  Bs.</span>
+                  </ons-list-item>
+            </ons-list>
         
-        </ons-list-item>
-      </ons-list>
-
  </div>
 
 </ons-page>

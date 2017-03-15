@@ -28,5 +28,12 @@ function Payment (){
     this.longitude;
     this.pendingToPaid=0;
     this.checks=new Array();
+
     //}
+
+    this.methods="";
+    this.methodsDate;
+    this.methodsAcct;
+    this.methodsRef;
+    this.methodsTotal=0;
 }

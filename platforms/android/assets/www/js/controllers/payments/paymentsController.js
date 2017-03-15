@@ -117,6 +117,15 @@ $scope.goToSelectBPFilter = function() {
     };
     //End showDetailPayments
 
+    //Begin showDetailsPaymentMethods
+    $scope.showDetailsPaymentMethods= function(index){
+       var selectedItem = $scope.payments[index];
+       salesNavigator.pushPage('views/payments/detailsPaymentMethods.html', {payment : selectedItem});
+       //$scope.ordersDiv=true;
+    
+    };
+    //End showDetailsPaymentMethods
+
 
  $scope.activarFiltroCliente = function(){
 
@@ -675,26 +684,57 @@ var payments=new Array();
                    
                   var nLength = results.rows.length;
        
-                  //alert(nLength);
-
+                  
                    for(var c=0;c<nLength;c++)
                    {
     
-                    // alert(results.rows.item(c).onHand);
                     var payment = new Payment();
                     var date = results.rows.item(c).docDate;
                     var anio = date.substring(4,0);
                     var mes=  date.substring(6,4);
                     var dia= date.substring(8,6); 
                     var concat = (anio+"-"+ mes +"-"+ dia);
+                    var mtd ='No aplica';
+
                     payment.docEntry= results.rows.item(c).docEntry;
                     payment.cardCode=results.rows.item(c).cardCode;
                     payment.cardName=results.rows.item(c).cardName;
                     payment.docDate=concat;
                     payment.docTotal=results.rows.item(c).docTotal;
+
+                    // Methods
                     payment.cashSum= results.rows.item(c).cashSum;
                     payment.transferSum= results.rows.item(c).transferSum;
                     payment.checkSum= results.rows.item(c).checkSum;
+                    payment.transferDate = results.rows.item(c).transferDate;
+                    payment.cashAcct = results.rows.item(c).cashAcct;
+                    payment.transferAcct = results.rows.item(c).transferAcct;
+                    payment.transferRef = results.rows.item(c).transferRef;
+
+
+                    if (payment.cashSum != 0){
+                          payment.methods ='Efectivo';
+                          payment.methodsDate = payment.transferDate;
+                          payment.methodsAcct = payment.cashAcct;
+                          payment.methodsRef = mtd;
+                          payment.methodsTotal= payment.cashSum;
+                    }
+
+                    if (payment.transferSum != 0){
+                          payment.methods ='Transferencia';
+                          payment.methodsDate =payment.transferDate;
+                          payment.methodsAcct=payment.transferAcct;
+                          payment.methodsRef=payment.transferRef;
+                          payment.methodsTotal = payment.transferSum;
+                    }
+
+                    if (payment.checkSum != 0){
+                          payment.methods ='Cheque';
+                          payment.methodsDate = payment.transferDate;
+                          payment.methodsAcct = mtd;
+                          payment.methodsRef = mtd;
+                          payment.methodsTotal = payment.checkSum;
+                    }
 
                 
            //          alert(results.rows.item(c).isCommited);

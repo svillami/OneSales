@@ -53,8 +53,7 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
     $scope.showDetailInvoices= function(index){
        var selectedItem = $scope.invoices[index];
        salesNavigator.pushPage('views/bp/invoiceCustomersDetails.html', {invoice : selectedItem});
-       $scope.ordersDiv=true;
-    
+       $scope.ordersDiv=true; 
     };
     //End showDetailInvoices
 
@@ -188,7 +187,7 @@ $scope.showMoreDetailsInvoice= function(index){
 // End summaryOrders  
 
 
-// Begin showInvoices
+// Begin ShowCustomerInvoices
     function ShowCustomerInvoices() {
 
       //Take the value chosen, in the previous option
@@ -252,7 +251,7 @@ $scope.showMoreDetailsInvoice= function(index){
            );
         });
     }
-// End showInvoices
+// End ShowCustomerInvoices
 
 
 // Begin showCustomersPayments

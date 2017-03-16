@@ -84,7 +84,7 @@
 
           <ons-list-item >
             <ons-row>
-                <span style="color:blue">Monto Total:</span>
+                <span style="color:blue">Monto total:</span>
                   
             </ons-row>
             <ons-row>
@@ -107,13 +107,13 @@
      </div>
 
     <ons-list class="order-list"> 
-       <ons-list-item class="documentLine" modifier="chevron" ng-repeat="payment in payments"  ng-click="showMoreDetailsInvoice($index)">
+       <ons-list-item class="payment" modifier="chevron" ng-repeat="invoice in invoices" >
 
             <ons-row>
-                <span style="color:#4282cc">{{payments.dscription}} </span>
+                <span style="color:#4282cc">{{invoice.cardName}} </span>
             </ons-row>
             <ons-row>
-                <span style="color:black"> Total: {{payments.lineTotal}} Bs. </span>
+                <span style="color:black"> Total: {{invoice.docTotal}} Bs. </span>
             </ons-row>
 
         </ons-list-item>

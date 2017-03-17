@@ -1,4 +1,4 @@
-<ons-page ng-controller="BusinessPartnerController">
+<ons-page ng-controller="BusinessPartnerDetailController">
 
     <ons-toolbar>
               <div class="left"><ons-back-button>Volver</ons-back-button></div>
@@ -7,7 +7,7 @@
 
     
     <ons-list class="order-list" >  
-        <ons-list-item class="order" modifier="chevron" ng-repeat="order in orders"  ng-click="showDetailOrder($index)">
+        <ons-list-item class="order" modifier="chevron" ng-repeat="order in orders" ng-click="showDetailOrder($index)">
             
             <ons-row>
                 <ons-col width="40px">

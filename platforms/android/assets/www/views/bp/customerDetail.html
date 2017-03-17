@@ -23,78 +23,68 @@
 
 
                 <ons-list-item >
-                  <ons-row>
-         <span style="color:blue">Rif:</span>
-
- </ons-row>
-   <ons-row>
-                  {{ getParams().licTradNum }} 
-
-                  </ons-row>
+                    <ons-row>
+                         <span style="color:blue">Rif:</span>
+                    </ons-row>
+                    <ons-row>
+                          {{ getParams().licTradNum }} 
+                    </ons-row>
                 </ons-list-item>
 
 
-    <ons-list-item >
-                  <ons-row>
-         <span style="color:blue">Balance:</span>
-
- </ons-row>
-   <ons-row>
-                   {{ getParams().balance }}
-
-                  </ons-row>
+                <ons-list-item >
+                    <ons-row>
+                       <span style="color:blue">Balance:</span>
+                    </ons-row>
+                    <ons-row>
+                      {{ getParams().balance }}
+                    </ons-row>
                 </ons-list-item>
 
-  <ons-list-item >
-                  <ons-row>
-         <span style="color:blue">Telefonos:</span>
-
- </ons-row>
-   <ons-row>
-                  {{ getParams().phone1 }} / {{ getParams().phone2 }}
-
-                  </ons-row>
+                <ons-list-item >
+                    <ons-row>
+                        <span style="color:blue">Telefonos:</span>
+                    </ons-row>
+                    <ons-row>
+                        {{ getParams().phone1 }} / {{ getParams().phone2 }}
+                    </ons-row>
                 </ons-list-item>
 
                 <ons-list-item >
                   <ons-row>
-         <span style="color:blue">Email:</span>
-
- </ons-row>
-   <ons-row>
-                  {{ getParams().email }}
-
+                       <span style="color:blue">Email:</span>
+                  </ons-row>
+                  <ons-row>
+                        {{ getParams().email }}
                   </ons-row>
                 </ons-list-item>
 
 
 
-    <ons-list-item >
-                  <ons-row>
-         <span style="color:blue">Persona Contacto:</span>
-
- </ons-row>
-   <ons-row>
-                  {{ getParams().contactName }}
-
-                  </ons-row>
+                <ons-list-item >
+                    <ons-row>
+                          <span style="color:blue">Persona Contacto:</span>
+                    </ons-row>
+                    <ons-row>
+                          {{ getParams().contactName }}
+                    </ons-row>
                 </ons-list-item>
 
-                        <ons-list-item >
-                  <ons-row>
-         <span style="color:blue">Condición de pago:</span>
-
- </ons-row>
-   <ons-row>
-                   {{ getParams().pymntGroup }}
-                  </ons-row>
+                <ons-list-item >
+                    <ons-row>
+                        <span style="color:blue">Condición de pago:</span>
+                    </ons-row>
+                    <ons-row>
+                     {{ getParams().pymntGroup }}
+                    </ons-row>
                 </ons-list-item>
 
-            <ons-list-item modifier="chevron" ng-click="showDocuments($index)">
-                  <ons-row>
-                      <span style="color:blue">Documentos:</span>
-                  </ons-row>
-            </ons-list-item>
+                <ons-list-item modifier="chevron" ng-click="showDocuments($index)">
+                      <ons-row>
+                          <span style="color:blue">Documentos:</span>
+                      </ons-row>
+                </ons-list-item>
 
-
+          </ons-list>
+          
 </ons-page>

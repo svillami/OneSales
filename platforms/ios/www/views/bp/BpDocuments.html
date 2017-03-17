@@ -1,18 +1,21 @@
-<ons-page ng-controller="BusinessPartnerController">
+<ons-page ng-controller="BusinessPartnerDetailController">
 
             <ons-toolbar>
                 <div class="left"><ons-back-button>Volver</ons-back-button></div>
                 <div class="center">Documentos</div>
             </ons-toolbar>
 
-              <ons-list-item ng-controller="BusinessPartnerDetailController" ng-repeat="businessPartner in businessPartners">
-                      <!--Cliente: {{businessPartner.cardName}}  Cliente: {{ getParams().cardName }} -->
-                      
-                      <span class="item-title"> Cliente: {{businessPartner.cardName}}</span>
-              </ons-list-item>
+              <ons-list-item class="item" ng-controller="BusinessPartnerDetailController">
+                    <ons-row>
+                        <ons-col>
+                            <span style="color:blue">Cliente: </span>
+                            <span style="color:black">{{ getParams().cardName }} </span>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
 
-            <ons-list modifier="inset" style="margin-top: 10px"  >
-                  <ons-list-item modifier="chevron" ng-click="showOrders($index)">
+            <ons-list modifier="inset" style="margin-top: 10px" ng-controller="BusinessPartnerDetailController">
+                  <ons-list-item modifier="chevron"  ng-click="showOrders($index)">
                         Pedidos
                   </ons-list-item>
                   <ons-list-item modifier="chevron" ng-click="showInvoices($index)">

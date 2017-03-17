@@ -733,65 +733,6 @@ return df.promise();
     } */
 // End invoicesPaid 
 
-// Begin checkInvoice
-function checkInvoice(){
-
-  var options = salesNavigator.getCurrentPage().options;
-    $scope.docEntry=options.payment.docEntry;
-
-  var queryInvo="SELECT * FROM RCT2 T0 ";
-  var per ='0';
-
-  if ($scope.docEntry != null && typeof($scope.docEntry) != 'undefined')
-      {
-
-        queryInvo = queryInvo +" WHERE T0.invoiceId='"+$scope.docEntry+"' "  ;
-
-      }
-    
-      invos=new Array();
-           dataBase.transaction(function(tx) {
-
-
-              tx.executeSql(queryInvo, 
-                         [],
-                         function(tx, results)
-                         {
-                          
-                          var nLength = results.rows.length;
-               
-              
-                           for(var c=0;c<nLength;c++)
-                           {
-                              var invo = new InvoicePaid();
-
-                                  invo.invoiceId= results.rows.item(c).invoiceId;
-                              
-                              invos.push(invo);
-                            }
-
-                            $scope.invos=invos;
-                            $scope.$apply();
-                          
-                             if($scope.invos != 'undefined')
-                             {
-                                per ='1'; 
-                                
-                             }
-                           
-                         },
-                         function(tx, error)
-                         {
-                           alert(error.message); 
-                         }
-                       
-           );
-              
-        }); 
-          
-      return per;
-}
-// End checkInvoice
 
 // Begin invoicesPaid
     function invoicesPaid() {
@@ -801,14 +742,13 @@ function checkInvoice(){
       $scope.docEntry=options.payment.docEntry;
  
     
-        var queryFilter="SELECT * FROM OINV T0 ";
-        //var per = checkInvoice();
-      
+        var queryFilter="SELECT * FROM OINV NV, RCT2 RC WHERE NV.docEntry= RC.invoiceId";
+        
        
       if ($scope.docEntry != null && typeof($scope.docEntry) != 'undefined')
       {
 
-        queryFilter = queryFilter +" WHERE T0.docEntry='"+$scope.docEntry+"' "   ;
+        queryFilter = queryFilter +" AND NV.docEntry='"+$scope.docEntry+"' "   ;
 
       } 
 

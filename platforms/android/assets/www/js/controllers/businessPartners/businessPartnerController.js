@@ -92,6 +92,12 @@ var BusinessPartnerController=function ($scope, $http, $filter) {
       fullInvoiceDetail();
   };
 
+$scope.getParamsBusinessPartners = function() { 
+    var options = salesNavigator.getCurrentPage().options;
+    $scope.businessPartners = options.businessPartner.cardName;
+    return options.businessPartner ;
+}
+
 //Calling in orderCustomersDetails
   $scope.getParams = function() { 
     var options = salesNavigator.getCurrentPage().options;

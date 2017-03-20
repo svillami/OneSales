@@ -2,10 +2,10 @@ var BusinessPartnerDetailController=function ($scope, $http, $filter) {
  
 
 $scope.getParams = function() { 
-
+    
     var options = salesNavigator.getCurrentPage().options;
     $scope.businessPartners = options.businessPartner.cardName;
-    summaryOrders($scope.businessPartners);
+    //summaryOrders($scope.businessPartners);
     return options.businessPartner;
 
 }
@@ -13,9 +13,11 @@ $scope.getParams = function() {
 
  //Begin showOrders
     $scope.showOrders = function(index) {
-        debugger;
-        var selectedItem = $scope.businessPartners;
-        salesNavigator.pushPage('views/bp/customerOrders.html', {businessPartner : selectedItem});
+        
+        var options = salesNavigator.getCurrentPage().options;
+        $scope.orders = options.orders;
+        var selectedItem = $scope.orders;
+        salesNavigator.pushPage('views/bp/customerOrders.html', {order : selectedItem});
     };
     //End showOrders
 
@@ -37,8 +39,9 @@ $scope.getParams = function() {
 // Changing to show before value 
 $scope.showDocuments = function(index) {
 
- //var selectedItem = $scope.businessPartners[index];
-  salesNavigator.pushPage('views/bp/BpDocuments.html', {businessPartner : $scope.businessPartners});
+  //summaryOrders($scope.businessPartners);
+    var selectedItem = $scope.businessPartners[index];
+  salesNavigator.pushPage('views/bp/BpDocuments.html', {businessPartner : selectedItem});
 };
     
 $scope.getParamsBusinessPartner = function() { 
@@ -72,6 +75,7 @@ $scope.showStock = function() {
 
 // Begin summaryOrders
     function summaryOrders(index) {
+
 
       //Take the value chosen, in the previous option
       var options = salesNavigator.getCurrentPage().options;

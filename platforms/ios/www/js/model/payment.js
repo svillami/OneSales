@@ -30,7 +30,8 @@ function Payment (){
     this.checks=new Array();
 
     //}
-
+    
+    // Added to display payment types
     this.methods="";
     this.methodsDate;
     this.methodsAcct;

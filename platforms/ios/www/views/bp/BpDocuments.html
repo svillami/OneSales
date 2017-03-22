@@ -1,11 +1,11 @@
-<ons-page ng-controller="BusinessPartnerDetailController">
+<ons-page ng-controller="BusinessPartnerDocumentController">
 
             <ons-toolbar>
                 <div class="left"><ons-back-button>Volver</ons-back-button></div>
                 <div class="center">Documentos</div>
             </ons-toolbar>
 
-              <ons-list-item class="item" ng-controller="BusinessPartnerDetailController">
+              <ons-list-item class="item" >
                     <ons-row>
                         <ons-col>
                             <span style="color:blue">Cliente: </span>
@@ -14,14 +14,14 @@
                     </ons-row>
                 </ons-list-item>
 
-            <ons-list modifier="inset" style="margin-top: 10px" ng-controller="BusinessPartnerController">
-                  <ons-list-item modifier="chevron"  ng-click="showOrders($index)">
+            <ons-list modifier="inset" style="margin-top: 10px" >
+                  <ons-list-item modifier="chevron"  ng-click="showOrders()">
                         Pedidos
                   </ons-list-item>
-                  <ons-list-item modifier="chevron" ng-click="showInvoices($index)">
+                  <ons-list-item modifier="chevron" ng-click="showInvoices()">
                         Facturas
                   </ons-list-item>
-                  <ons-list-item modifier="chevron" ng-click="showPayments($index)"> 
+                  <ons-list-item modifier="chevron" ng-click="showPayments()"> 
                         Pagos
                   </ons-list-item>
             </ons-list>

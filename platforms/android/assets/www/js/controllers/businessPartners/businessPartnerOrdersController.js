@@ -130,7 +130,6 @@ var BusinessPartnerOrdersDetailsController=function ($scope, $http, $filter) {
         //Take the value chosen, in the previous option
         var options = salesNavigator.getCurrentPage().options;
         //$scope.cardName=options.businessPartner.cardName;
-        alert(options.businessPartner.cardName);
         var queryFilter="SELECT * FROM ORDR T0  " ;
 
 

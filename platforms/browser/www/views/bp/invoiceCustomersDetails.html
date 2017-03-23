@@ -111,15 +111,10 @@
   <!-- Details-->
  <div class="content" ng-show="detailsInvoice"> 
  
-     <div class="navigation-bar">
-              <div class="navigation-bar__center">
 
-                <input type="search" class="search-input" ng-model="query" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Buscar">
+    <ons-list class="order-list"> 
 
-              </div>
-     </div>
 
-    <ons-list class="order-list" ng-controller="BusinessPartnerInvoicesMoreDetailsController" > 
        <ons-list-item class="documentLine" modifier="chevron" ng-repeat="documentLine in documentsLine"  ng-click="showMoreDetailsInvoice($index)">
 
             <ons-row>

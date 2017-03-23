@@ -6,13 +6,13 @@ ShowCustomerInvoices();
     $scope.showDetailInvoices= function(index){
        var selectedItem = $scope.invoices[index];
        salesNavigator.pushPage('views/bp/invoiceCustomersDetails.html', {invoice : selectedItem});
-       $scope.ordersDiv=true; 
     };
     //End showDetailInvoices
 
 
 // Begin ShowCustomerInvoices
     function ShowCustomerInvoices() {
+
 
       //Take the value chosen, in the previous option
       var options = salesNavigator.getCurrentPage().options;
@@ -21,12 +21,12 @@ ShowCustomerInvoices();
         var queryFilter="SELECT * FROM OINV T0 ";
 
 
-      if ($scope.cardName != null && typeof($scope.cardName) != 'undefined')
+      /*if (options.businessPartner.cardName != null && typeof(options.businessPartner.cardName) != 'undefined')
       {
 
-        queryFilter = queryFilter +" WHERE T0.cardName='"+$scope.cardName+"'";
+        queryFilter = queryFilter +" WHERE T0.cardName='"+options.businessPartner.cardName+"'";
 
-      }
+      }*/
 
         invoices=new Array();
            dataBase.transaction(function(tx) {
@@ -38,7 +38,7 @@ ShowCustomerInvoices();
                            
                           var nLength = results.rows.length;
                
-
+                         
                            for(var c=0;c<nLength;c++)
                            {
                               var invoice = new Document();
@@ -86,21 +86,29 @@ oneApp.controller('BusinessPartnerInvoicesController', BusinessPartnerInvoicesCo
 
 
 
+
 //////////////////////////////// Other controller ///////////////////////////////////////
 
 var BusinessPartnerInvoicesDetailsController=function ($scope, $http, $filter) {
 
-	$scope.summary = true;
+  	$scope.summary = true;
     $scope.detailsInvoice=false;
 
     
     //Calling in invoiceCustomersDetails
-	  $scope.getParamsInvoices = function() { 
-	    var options = salesNavigator.getCurrentPage().options;
-	    return options.invoice;
-	  }; 
+    $scope.getParamsInvoices = function() { 
+      var options = salesNavigator.getCurrentPage().options;
+      return options.invoice;
+    }; 
 
-	  
+   
+
+    // Begin showMoreDetailsInvoice
+	$scope.showMoreDetailsInvoice= function(index){
+      var selectedItem = $scope.documentsLine[index];
+      salesNavigator.pushPage('views/bp/invoiceMoreDetails.html', {documentLine : selectedItem});
+    };
+//End showMoreDetailsInvoice   
 
     //Calling the filters in OrderDetails.html and invoiceCustomersDetails to Summary
     $scope.showInvoiceSummary= function(){
@@ -114,13 +122,13 @@ var BusinessPartnerInvoicesDetailsController=function ($scope, $http, $filter) {
     };
 
     //Calling the filters in invoceCustomersDetails.html to DetailsInvoice
-  	$scope.showInvoiceDetails= function(){
+    $scope.showInvoiceDetails= function(){
       $scope.detailsInvoice=true;
       $scope.summary = false;
 
       
       fullInvoiceDetail();
-  };
+    };
 
 // Begin ShowCustomerInvoices
     function ShowCustomerInvoices() {
@@ -132,12 +140,12 @@ var BusinessPartnerInvoicesDetailsController=function ($scope, $http, $filter) {
         var queryFilter="SELECT * FROM OINV T0 ";
 
 
-      if ($scope.cardName != null && typeof($scope.cardName) != 'undefined')
+     /* if (options.businessPartner.cardName != null && typeof(options.businessPartner.cardName) != 'undefined')
       {
 
-        queryFilter = queryFilter +" WHERE T0.cardName='"+$scope.cardName+"'";
+        queryFilter = queryFilter +" WHERE T0.cardName='"+options.businessPartner.cardName+"'";
 
-      }
+      } */
 
         invoices=new Array();
            dataBase.transaction(function(tx) {
@@ -260,29 +268,20 @@ oneApp.controller('BusinessPartnerInvoicesDetailsController', BusinessPartnerInv
 
 var BusinessPartnerInvoicesMoreDetailsController=function ($scope, $http, $filter) {
 
-fullInvoiceDetail();
+fullInvoiceMoreDetail();
 
-  // Begin getParamsOrderLine
+
 $scope.getParamsDocumentLine = function() { 
-    
-    var options = salesNavigator.getCurrentPage().options;
-    return options.documentLine; 
-  };
-// End getParamsOrderLine
-
-// Begin showMoreDetailsInvoice
-$scope.showMoreDetailsInvoice= function(index){
-      var selectedItem = $scope.documentsLine[index];
-      salesNavigator.pushPage('views/bp/invoiceMoreDetails.html', {documentLine : selectedItem});
+      var options = salesNavigator.getCurrentPage().options;
+      return options.documentLine; 
     };
-//End showMoreDetailsInvoice   
 
   // Begin fullInvoiceDetail
-function fullInvoiceDetail() {
+function fullInvoiceMoreDetail() {
 
     //Take the value chosen, in the previous option
     var options = salesNavigator.getCurrentPage().options;
-    $scope.docEntry=options.invoice.docEntry;
+    $scope.docEntry=options.documentLine.docEntry;
 
     var queryFilter="SELECT * FROM INV1 T0";
 
@@ -339,3 +338,6 @@ function fullInvoiceDetail() {
 BusinessPartnerInvoicesMoreDetailsController.$inject = ["$scope", "$http", "$filter"];
 
 oneApp.controller('BusinessPartnerInvoicesMoreDetailsController', BusinessPartnerInvoicesMoreDetailsController);
+
+
+

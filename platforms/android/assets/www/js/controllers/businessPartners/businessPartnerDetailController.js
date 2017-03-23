@@ -20,6 +20,8 @@ BusinessPartnerDetailController.$inject = ["$scope", "$http", "$filter"];
 oneApp.controller('BusinessPartnerDetailController', BusinessPartnerDetailController);
 
 
+
+
 //////////////////////////////// Other controller /////////////////////////////////////////
 
 var BusinessPartnerDocumentController=function ($scope, $http, $filter) {

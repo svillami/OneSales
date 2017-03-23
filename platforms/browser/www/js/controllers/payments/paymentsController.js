@@ -2,11 +2,6 @@ var  PaymentsController=function ($scope, $http, $filter) {
  
 $scope.divPayments = true;
 $scope.filtros = false;
-
-$scope.summary = true;
-$scope.details=false;
-$scope.paymentmethods=false;
-
 var filters=new Filter();
 filters.docDateFrom=new Date();
 filters.docDateTo=new  Date();
@@ -72,59 +67,12 @@ $scope.showFiltrosDiv = function(){
      filtersPayments(); 
     };
 
-  //CalliESTEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-  $scope.showOrderSummary= function(){
-        $scope.summary = true;
-        $scope.details=false;
-        $scope.paymentmethods=false;  
-  };    
-
-  //CalliESTEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-  $scope.showInvoiceDetails= function(){
-      $scope.summary = false;
-      $scope.details=true;
-      $scope.paymentmethods=false;
-
-      invoicesPaid();
-  };
-
-  //CalliESTEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-  $scope.showPaymentMethods= function(){
-      $scope.summary = false;
-      $scope.details=false;
-      $scope.paymentmethods=true;
-  };
-
-  //Calling in invoiceCustomersDetails
-  $scope.getParamsPayments = function() { 
-    var options = salesNavigator.getCurrentPage().options;
-    return options.payment;
-  }; 
-
 $scope.goToSelectBPFilter = function() { 
     
    
    salesNavigator.pushPage('views/payments/selectClientPayments.html', {'form' : 'filters', filter : filters});
   
   };
-
-  //Begin showDetailPayments
-    $scope.showDetailPayments= function(index){
-       var selectedItem = $scope.payments[index];
-       salesNavigator.pushPage('views/payments/paymentCustomersDetails.html', {payment : selectedItem});
-       //$scope.ordersDiv=true;
-    
-    };
-    //End showDetailPayments
-
-    //Begin showDetailsPaymentMethods
-    $scope.showDetailsPaymentMethods= function(index){
-       var selectedItem = $scope.payments[index];
-       salesNavigator.pushPage('views/payments/detailsPaymentMethods.html', {payment : selectedItem});
-       //$scope.ordersDiv=true;
-    
-    };
-    //End showDetailsPaymentMethods
 
 
  $scope.activarFiltroCliente = function(){
@@ -669,226 +617,50 @@ return df.promise();
 
 }
 
-// Begin invoicesPaid
-/*    function invoicesPaid() {
-
-      debugger;
-      //Take the value chosen, in the previous option
-      var options = salesNavigator.getCurrentPage().options;
-      //$scope.docEntry=options.payment.docEntry;
-
-      //var queryInvoice="SELECT TO.invoiceId FROM RCT2 TO";
-
-      var queryFilter="SELECT * FROM ORCT T0 ";
-
-      debugger;
-      if ($scope.docEntry != null && typeof($scope.docEntry) != 'undefined')
-      {
-
-        queryFilter = queryFilter +" WHERE T0.docEntry='"+$scope.docEntry+"' ";
-
-      }
-
-      debugger;
-        invoices=new Array();
-           dataBase.transaction(function(tx) {
-
-              tx.executeSql(queryFilter, 
-                         [],
-                         function(tx, results)
-                         {
-                           
-                          var nLength = results.rows.length;
-               
-
-                           for(var c=0;c<nLength;c++)
-                           {
-
-                              var invoice = new Payment();
-
-                              var date = results.rows.item(c).docDate;
-                              var anio = date.substring(4,0);
-                              var mes=  date.substring(6,4);
-                              var dia= date.substring(8,6); 
-                              var concat = (anio+"-"+ mes +"-"+ dia);
-
-                              invoice.docEntry= results.rows.item(c).docEntry;
-                              invoice.cardCode=results.rows.item(c).cardCode;
-                              invoice.cardName=results.rows.item(c).cardName;
-                              invoice.docDate+ = concat;
-                              
-              
-                              invoices.push(invoice);
-                          }
-                            $scope.invoices=invoices;
-                            $scope.$apply();
-            
-                         },
-                         function(tx, error)
-                         {
-                           alert(error.message); 
-                         }
-           );
-        });
-    } */
-// End invoicesPaid 
-
-
-// Begin invoicesPaid
-    function invoicesPaid() {
-
-      //Take the value chosen, in the previous option
-      var options = salesNavigator.getCurrentPage().options;
-      $scope.docEntry=options.payment.docEntry;
- 
-    
-        var queryFilter="SELECT * FROM OINV NV, RCT2 RC WHERE NV.docEntry= RC.invoiceId";
-        
-       
-      if ($scope.docEntry != null && typeof($scope.docEntry) != 'undefined')
-      {
-
-        queryFilter = queryFilter +" AND NV.docEntry='"+$scope.docEntry+"' "   ;
-
-      } 
-
-     
-        invoices=new Array();
-           dataBase.transaction(function(tx) {
-
-              tx.executeSql(queryFilter, 
-                         [],
-                         function(tx, results)
-                         {
-                           
-                          var nLength = results.rows.length;
-               
-                        
-                           for(var c=0;c<nLength;c++)
-                           {
-                              var invoice = new Document();
-
-                              var date = results.rows.item(c).docDate;
-                              var anio = date.substring(4,0);
-                              var mes=  date.substring(6,4);
-                              var dia= date.substring(8,6); 
-                              var concat = (anio+"-"+ mes +"-"+ dia);
-
-                              invoice.docEntry= results.rows.item(c).docEntry;
-                              invoice.cardCode= results.rows.item(c).cardCode;
-                              invoice.cardName= results.rows.item(c).cardName;
-                              invoice.docDate=  concat;
-                              invoice.taxDate=  results.rows.item(c).taxDate;
-                              invoice.discount= results.rows.item(c).discount;
-                              invoice.discountPercent= results.rows.item(c).discountPercent;
-                              invoice.comments= results.rows.item(c).comments;
-                              invoice.paidToDate= results.rows.item(c).paidToDate;
-                              invoice.docTotal= results.rows.item(c).docTotal;
-                              invoice.VatSum= results.rows.item(c).VatSum;
-                              invoice.baseImp= (invoice.docTotal-invoice.VatSum);
-                              
-                              invoices.push(invoice);
-                          }
-                            $scope.invoices=invoices;
-                            $scope.$apply();
-            
-                         },
-                         function(tx, error)
-                         {
-                           alert(error.message); 
-                         }
-           );
-        }); 
-    }
-// End invoicesPaid
-
-
-
 function getPayments(){
 
 
-  var payments=new Array();
+var payments=new Array();
 
-     dataBase.transaction(function(tx) {
+   dataBase.transaction(function(tx) {
 
-     //alert('carajo');
-        tx.executeSql('SELECT * FROM ORCT T0', 
-                   [],
-                   function(tx, results)
+   //alert('carajo');
+      tx.executeSql('SELECT * FROM ORCT T0', 
+                 [],
+                 function(tx, results)
+                 {
+                   
+                  var nLength = results.rows.length;
+       
+                  //alert(nLength);
+
+                   for(var c=0;c<nLength;c++)
                    {
-                     
-                    var nLength = results.rows.length;
-         
-                    
-                     for(var c=0;c<nLength;c++)
-                     {
-      
-                      var payment = new Payment();
-                      var date = results.rows.item(c).docDate;
-                      var anio = date.substring(4,0);
-                      var mes=  date.substring(6,4);
-                      var dia= date.substring(8,6); 
-                      var concat = (anio+"-"+ mes +"-"+ dia);
-                      var mtd ='No aplica';
-
-                      payment.docEntry= results.rows.item(c).docEntry;
-                      payment.cardCode=results.rows.item(c).cardCode;
-                      payment.cardName=results.rows.item(c).cardName;
-                      payment.docDate=concat;
-                      payment.docTotal=results.rows.item(c).docTotal;
-
-                      // Methods
-                      payment.cashSum= results.rows.item(c).cashSum;
-                      payment.transferSum= results.rows.item(c).transferSum;
-                      payment.checkSum= results.rows.item(c).checkSum;
-                      payment.transferDate = results.rows.item(c).transferDate;
-                      payment.cashAcct = results.rows.item(c).cashAcct;
-                      payment.transferAcct = results.rows.item(c).transferAcct;
-                      payment.transferRef = results.rows.item(c).transferRef;
-
-
-                      if (payment.cashSum != 0){
-                            payment.methods ='Efectivo';
-                            payment.methodsDate = payment.transferDate;
-                            payment.methodsAcct = payment.cashAcct;
-                            payment.methodsRef = mtd;
-                            payment.methodsTotal= payment.cashSum;
-                      }
-
-                      if (payment.transferSum != 0){
-                            payment.methods ='Transferencia';
-                            payment.methodsDate =payment.transferDate;
-                            payment.methodsAcct=payment.transferAcct;
-                            payment.methodsRef=payment.transferRef;
-                            payment.methodsTotal = payment.transferSum;
-                      }
-
-                      if (payment.checkSum != 0){
-                            payment.methods ='Cheque';
-                            payment.methodsDate = payment.transferDate;
-                            payment.methodsAcct = mtd;
-                            payment.methodsRef = mtd;
-                            payment.methodsTotal = payment.checkSum;
-                      }
-
-                  
-             //          alert(results.rows.item(c).isCommited);
-                      payments.push(payment);
     
-                    }
-          
-         // alert(wareHousesStock.length)
-                  $scope.payments=payments;
-              // alert($scope.whsStockList.length);
-                  $scope.$apply();
-      
-                   },
-                   function(tx, error)
-                   {
-                     alert(error.message); 
-                   }
-     );
-  });
+                    // alert(results.rows.item(c).onHand);
+                    var payment = new Payment();
+                    payment.docEntry= results.rows.item(c).docEntry;
+                    payment.cardCode=results.rows.item(c).cardCode;
+                    payment.cardName=results.rows.item(c).cardName;
+                    payment.docDate=results.rows.item(c).docDate;
+                    payment.docTotal=results.rows.item(c).docTotal;
+           //          alert(results.rows.item(c).isCommited);
+                    payments.push(payment);
+  
+                  }
+        
+       // alert(wareHousesStock.length)
+                $scope.payments=payments;
+            // alert($scope.whsStockList.length);
+                $scope.$apply();
+    
+                 },
+                 function(tx, error)
+                 {
+                   alert(error.message); 
+                 }
+   );
+});
 }
 
 function addZero(i) {
@@ -912,7 +684,7 @@ $scope.selectBP = function(index) {
      var options = salesNavigator.getCurrentPage().options;
      var selectedItem = $scope.businessPartners[index];
 
-  	
+    
      // options.order.cardName=selectedItem.cardName;
      // options.order.cardCode=selectedItem.cardCode;
      
@@ -959,13 +731,13 @@ function successResults(tx,results)
         //alert(nLength);
        for(var c=0;c<nLength;c++){
         
-		    // alert(results.rows.item(c).itemCode);
-		     var businessPartner = new BusinessPartner
-		    (results.rows.item(c).cardCode,
-		    results.rows.item(c).cardName,
-		    results.rows.item(c).licTradNum,
-		    results.rows.item(c).email,
-		    results.rows.item(c).phone1,
+        // alert(results.rows.item(c).itemCode);
+         var businessPartner = new BusinessPartner
+        (results.rows.item(c).cardCode,
+        results.rows.item(c).cardName,
+        results.rows.item(c).licTradNum,
+        results.rows.item(c).email,
+        results.rows.item(c).phone1,
             results.rows.item(c).phone2,
             results.rows.item(c).balance,
             results.rows.item(c).contactCode,
@@ -975,9 +747,9 @@ function successResults(tx,results)
             results.rows.item(c).slpCode,
             results.rows.item(c).address,
             results.rows.item(c).mailAddress);
-		     // alert(item.itemCode+ ' ' + item.itemName +'stock '+results.rows.item(c).stock);
-			businessPartners.push(businessPartner);
-	
+         // alert(item.itemCode+ ' ' + item.itemName +'stock '+results.rows.item(c).stock);
+      businessPartners.push(businessPartner);
+  
         }
         
     $scope.businessPartners=businessPartners;

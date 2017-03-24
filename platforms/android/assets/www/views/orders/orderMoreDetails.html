@@ -1,13 +1,12 @@
-<ons-page ng-controller="BusinessPartnerOrdersOthersDetailsController"> 
-<!-- El controlador BusinessPartnerOrdersOthersDetailsController se encuentra embebedio en el BusinessPartnerOrdersController  -->
+<ons-page ng-controller="OrdersController"> 
 
-
+<!-- Detalle -->
   <ons-toolbar>
       <div class="left"><ons-back-button>Volver</ons-back-button></div>
       <div class="center">Detalle Completo</div>
   </ons-toolbar>
 
-<ons-list modifier="inset" style="margin-top: 10px" >
+<ons-list modifier="inset" style="margin-top: 10px" ng-controller="OrdersController" >
           <ons-list-item class="item">
               <ons-row>
                   <ons-col width="60px">

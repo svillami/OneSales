@@ -66,10 +66,12 @@ var BusinessPartnerOrdersController=function ($scope, $http, $filter) {
                               order.docEntry= results.rows.item(c).docEntry;
                               order.cardCode=results.rows.item(c).cardCode;
                               order.cardName=results.rows.item(c).cardName;
-                              order.baseImp=results.rows.item(c).baseImp;
                               order.docTotal=results.rows.item(c).docTotal;
                               order.docDate= concat;
                               order.vatSum= results.rows.item(c).vatSum;
+                              order.baseImp= (order.docTotal-order.VatSum);
+
+
                               orders.push(order);
                           }
                             $scope.orders=orders;
@@ -165,10 +167,11 @@ var BusinessPartnerOrdersDetailsController=function ($scope, $http, $filter) {
                               order.docEntry= results.rows.item(c).docEntry;
                               order.cardCode=results.rows.item(c).cardCode;
                               order.cardName=results.rows.item(c).cardName;
-                              order.baseImp=results.rows.item(c).baseImp;
+                              
                               order.docTotal=results.rows.item(c).docTotal;
                               order.docDate= concat;
                               order.vatSum= results.rows.item(c).vatSum;
+                              order.baseImp= (order.docTotal-order.VatSum);
                               orders.push(order);
                           }
                             $scope.orders=orders;

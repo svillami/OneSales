@@ -240,12 +240,21 @@ orders=new Array();
                    
                     // alert(results.rows.item(c).onHand);
                     var order = new Order();
+
+                    var date = results.rows.item(c).docDate;
+                    var anio = date.substring(4,0);
+                    var  mes=  date.substring(6,4);
+                    var dia= date.substring(8,6); 
+                    var concat = (anio+"-"+ mes +"-"+ dia);
                     order.docEntry= results.rows.item(c).docEntry;
                     order.cardCode=results.rows.item(c).cardCode;
                     order.cardName=results.rows.item(c).cardName;
-                    order.baseImp=results.rows.item(c).baseImp;
+                 
                     order.docTotal=results.rows.item(c).docTotal;
                     order.VatSum= results.rows.item(c).VatSum;
+                    order.baseImp= (order.docTotal-order.VatSum);
+
+                    order.docDate = concat;
            //          alert(results.rows.item(c).isCommited);
                      orders.push(order);
   

@@ -11,11 +11,10 @@ var businessPartnerPaymentsController=function ($scope, $http, $filter) {
     //End showDetailPayments
 
     // Begin getPayments
-    function getPayments(){
+function getPayments(){
 
 
-
-var options = salesNavigator.getCurrentPage().options;
+  var options = salesNavigator.getCurrentPage().options;
       
       var queryFilter="SELECT * FROM ORCT T0 " ;
 
@@ -167,16 +166,14 @@ $scope.paymentmethods=false;
 
       //Take the value chosen, in the previous option
       var options = salesNavigator.getCurrentPage().options;
-      $scope.docEntry=options.payment.docEntry;
- 
-    
+      
         var queryFilter="SELECT * FROM OINV NV, RCT2 RC WHERE NV.docEntry= RC.invoiceId";
         
        
-      if ($scope.docEntry != null && typeof($scope.docEntry) != 'undefined')
+      if (options.payment.docEntry != null && typeof(options.payment.docEntry) != 'undefined')
       {
 
-        queryFilter = queryFilter +" AND NV.docEntry='"+$scope.docEntry+"' "   ;
+        queryFilter = queryFilter +" AND NV.docEntry='"+options.payment.docEntry+"' "   ;
 
       } 
 

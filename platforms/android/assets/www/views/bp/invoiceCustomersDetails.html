@@ -26,7 +26,7 @@
           </div>
 </div>
 
-<!-- Summary-->
+<!-- list-->
  <div class="content" ng-show="summary">       
 
     <ons-list class="order"  modifier="inset" style="margin-top: 10px" >
@@ -81,7 +81,7 @@
 
             </ons-row>
             <ons-row>
-                {{ getParamsInvoices().baseImp }} Bs.
+                {{ getParamsInvoices().baseImp }},00 Bs.
             </ons-row>
           </ons-list-item>
 
@@ -91,7 +91,7 @@
 
             </ons-row>
             <ons-row>
-                {{ getParamsInvoices().VatSum }} Bs.
+                {{ getParamsInvoices().VatSum }},00 Bs.
             </ons-row>
           </ons-list-item>
 
@@ -101,7 +101,7 @@
                   
             </ons-row>
             <ons-row>
-               {{ getParamsInvoices().docTotal }} Bs.
+               {{ getParamsInvoices().docTotal }},00 Bs.
             </ons-row>
           </ons-list-item>
     </ons-list>
@@ -118,11 +118,25 @@
        <ons-list-item class="documentLine" modifier="chevron" ng-repeat="documentLine in documentsLine"  ng-click="showMoreDetailsInvoice($index)">
 
             <ons-row>
+             <ons-col class="order-client">
                 <span style="color:#4282cc">{{documentLine.dscription}} </span>
+             </ons-col>
             </ons-row>
+
             <ons-row>
-                <span style="color:black"> Total: {{documentLine.lineTotal}} Bs. </span>
+             <ons-col class="order-client">
+             <span style="color:#4282cc">Cantidad:</span>
+                <span style="color:black">{{documentLine.quantity}} </span>
+              </ons-col>
             </ons-row>
+
+            <ons-row>
+             <ons-col class="order-client">
+                <span style="color:#4282cc"> Total: </span>
+                <span style="color:black">{{documentLine.lineTotal}},00 Bs. </span>
+                </ons-col>
+            </ons-row>
+
 
         </ons-list-item>
       </ons-list>

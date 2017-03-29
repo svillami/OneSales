@@ -109,7 +109,7 @@ var BusinessPartnerOrdersDetailsController=function ($scope, $http, $filter) {
     };
     
 
-    //Calling the filters in OrderDetails.html and invoiceCustomersDetails to Summary
+    //Calling the filters in OrderDetails.html and invoiceCustomersDetails to list
     $scope.showOrderSummary= function(){
           $scope.summary = true;
           $scope.details=false;
@@ -192,17 +192,10 @@ oneApp.controller('BusinessPartnerOrdersDetailsController', BusinessPartnerOrder
 
 var BusinessPartnerOrdersMoreDetailsController=function ($scope, $http, $filter) {
 
-
-
-$scope.showMoreDetails= function(index){
-    var selectedItem = $scope.ordersLine[index];
-    salesNavigator.pushPage('views/orders/orderMoreDetails.html', {orderLine : selectedItem});
- };
-
-
-
-// End fullOrderDetail
-
+    $scope.showMoreDetails= function(index){
+        var selectedItem = $scope.ordersLine[index];
+        salesNavigator.pushPage('views/orders/orderMoreDetails.html', {orderLine : selectedItem});
+     };
 
 }
 

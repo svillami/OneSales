@@ -1,4 +1,4 @@
-<ons-page ng-controller="OrdersController"> 
+<ons-page ng-controller="orderMoreDetailsController"> 
 
 <!-- Detalle -->
   <ons-toolbar>
@@ -6,7 +6,7 @@
       <div class="center">Detalle Completo</div>
   </ons-toolbar>
 
-<ons-list modifier="inset" style="margin-top: 10px" ng-controller="OrdersController" >
+<ons-list modifier="inset" style="margin-top: 10px" ng-controller="orderMoreDetailsController" >
           <ons-list-item class="item">
               <ons-row>
                   <ons-col width="60px">
@@ -48,7 +48,7 @@
                  	
             </ons-row>
             <ons-row>
-                {{getParamsOrderLine().price }} Bs.
+                {{getParamsOrderLine().price }},00 Bs.
             </ons-row>
           </ons-list-item>
 
@@ -58,7 +58,7 @@
                   
             </ons-row>
             <ons-row>
-               {{ getParamsOrderLine().lineTotal }} Bs.
+               {{ getParamsOrderLine().lineTotal}},00 Bs.
             </ons-row>
           </ons-list-item>
 </ons-list>

@@ -1,4 +1,4 @@
-<ons-page ng-controller="OrdersController">
+<ons-page ng-controller="orderDetailsController">
 
 <!-- Lista de pedidos con resumen y detalles -->
   <ons-toolbar>
@@ -12,7 +12,7 @@
 
             <!-- segment control -->
             <div class="button-bar" style="width:200px; margin:8px auto 0;">
-              <div class="button-bar__item" ng-click="showOrderSummary();">
+              <div class="button-bar__item" ng-click="showOrderList();">
                   <input type="radio" name="navi-segment-a"  checked >
                   <div class="button-bar__button" >Resumen</div>
               </div>
@@ -26,10 +26,10 @@
           </div>
 </div>
 
-<!-- Summary-->
- <div class="content" ng-show="summary">       
+<!-- List-->
+ <div class="content" ng-show="list">       
 
-    <ons-list class="order"  modifier="inset" style="margin-top: 10px" ng-controller="OrdersController" >
+    <ons-list class="order"  modifier="inset" style="margin-top: 10px" ng-controller="orderDetailsController" >
           <ons-list-item class="item">
               <ons-row>
                   <ons-col width="60px">
@@ -71,7 +71,7 @@
 
             </ons-row>
             <ons-row>
-                {{ getParams().baseImp}} Bs.
+                {{ getParams().baseImp}},00 Bs.
             </ons-row>
           </ons-list-item>
 
@@ -82,7 +82,7 @@
             </ons-row>
             <ons-row>
             
-                {{ getParams().VatSum }} Bs.
+                {{ getParams().VatSum }},00 Bs.
             </ons-row>
           </ons-list-item>
 
@@ -92,7 +92,7 @@
                   
             </ons-row>
             <ons-row>
-               {{ getParams().docTotal }} Bs.
+               {{ getParams().docTotal }},00 Bs.
             </ons-row>
           </ons-list-item>
     </ons-list>
@@ -110,15 +110,25 @@
               </div>
      </div>
 
-    <ons-list class="order-list" ng-controller="OrdersController" > 
-       <ons-list-item class="orderLine" modifier="chevron" ng-repeat="orderLine in ordersLine | filter:query"  ng-click="showMoreDetails($index)" ><!--ng-repeat="i in [1,2,3,4,5]">-->
-            <!-- <span style="color:blue;">{{order.docEntry}}</span>&nbsp-&nbsp{{order.cardName}}&nbsp-&nbsp{{order.docTotal}}&nbsp-&nbsp{{order.docDate}} -->
+    <ons-list class="order-list" ng-controller="orderDetailsController" > 
+       <ons-list-item class="orderLine" modifier="chevron" ng-repeat="orderLine in ordersLine | filter:query"  ng-click="showMoreDetails($index)" >
 
             <ons-row>
-                <span style="color:#4282cc">{{orderLine.dscription}} </span>
+                <ons-col >
+                    <span style="color:#4282cc">{{orderLine.dscription}} </span>
+                </ons-col>
             </ons-row>
             <ons-row>
-                <span style="color:black"> Total: {{orderLine.lineTotal}} Bs. </span>
+                <ons-col>
+                  <span style="color:#4282cc"> Cantidad: </span>
+                  <span style="color:black">  {{orderLine.quantity}} </span>
+                </ons-col>
+            </ons-row>
+            <ons-row>
+                <ons-col>
+                  <span style="color:#4282cc"> Total: </span>
+                  <span style="color:black">  {{orderLine.lineTotal}},00 Bs. </span>
+                </ons-col>
             </ons-row>
 
         </ons-list-item>

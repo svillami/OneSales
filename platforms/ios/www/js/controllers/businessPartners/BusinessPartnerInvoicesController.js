@@ -21,12 +21,12 @@ ShowCustomerInvoices();
         var queryFilter="SELECT * FROM OINV T0 ";
 
 
-      /*if (options.businessPartner.cardName != null && typeof(options.businessPartner.cardName) != 'undefined')
+     if (options.businessPartner.cardCode != null && typeof(options.businessPartner.cardCode) != 'undefined')
       {
 
-        queryFilter = queryFilter +" WHERE T0.cardName='"+options.businessPartner.cardName+"'";
+        queryFilter = queryFilter +" WHERE T0.cardCode='"+options.businessPartner.cardCode+"'";
 
-      }*/
+      }
 
         invoices=new Array();
            dataBase.transaction(function(tx) {
@@ -117,7 +117,7 @@ var BusinessPartnerInvoicesDetailsController=function ($scope, $http, $filter) {
       
       //Calling Invoices
       //summaryOrders();
-      ShowCustomerInvoices();
+      //ShowCustomerInvoices();
 
     };
 
@@ -131,13 +131,13 @@ var BusinessPartnerInvoicesDetailsController=function ($scope, $http, $filter) {
     };
 
 // Begin ShowCustomerInvoices
-    function ShowCustomerInvoices() {
+ /*   function ShowCustomerInvoices() {
 
       //Take the value chosen, in the previous option
       var options = salesNavigator.getCurrentPage().options;
       //$scope.cardName=options.businessPartner.cardName;
 
-        var queryFilter="SELECT * FROM OINV T0 ";
+        var queryFilter="SELECT * FROM OINV T0 "; */
 
 
      /* if (options.businessPartner.cardName != null && typeof(options.businessPartner.cardName) != 'undefined')
@@ -147,7 +147,7 @@ var BusinessPartnerInvoicesDetailsController=function ($scope, $http, $filter) {
 
       } */
 
-        invoices=new Array();
+    /*    invoices=new Array();
            dataBase.transaction(function(tx) {
 
               tx.executeSql(queryFilter, 
@@ -192,9 +192,9 @@ var BusinessPartnerInvoicesDetailsController=function ($scope, $http, $filter) {
                            alert(error.message); 
                          }
            );
-        });
-    }
-// End ShowCustomerInvoices
+        }); 
+    }*/
+// End ShowCustomerInvoices 
 
 
 
@@ -268,7 +268,7 @@ oneApp.controller('BusinessPartnerInvoicesDetailsController', BusinessPartnerInv
 
 var BusinessPartnerInvoicesMoreDetailsController=function ($scope, $http, $filter) {
 
-fullInvoiceMoreDetail();
+//fullInvoiceMoreDetail();
 
 
 $scope.getParamsDocumentLine = function() { 
@@ -277,7 +277,7 @@ $scope.getParamsDocumentLine = function() {
     };
 
   // Begin fullInvoiceDetail
-function fullInvoiceMoreDetail() {
+/*function fullInvoiceMoreDetail() {
 
     //Take the value chosen, in the previous option
     var options = salesNavigator.getCurrentPage().options;
@@ -329,7 +329,7 @@ function fullInvoiceMoreDetail() {
                      }
        );
     });
-}
+} */
 // End fullInvoiceDetail
 
 

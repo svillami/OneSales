@@ -18899,7 +18899,7 @@ function getTypeForFilter(val) {
 }
 
 var MAX_DIGITS = 22;
-var DECIMAL_SEP = '.';
+var DECIMAL_SEP = ',';
 var ZERO_CHAR = '0';
 
 /**
@@ -29777,8 +29777,8 @@ $provide.value("$locale", {
   },
   "NUMBER_FORMATS": {
     "CURRENCY_SYM": "$",
-    "DECIMAL_SEP": ".",
-    "GROUP_SEP": ",",
+    "DECIMAL_SEP": ",",
+    "GROUP_SEP": ".",
     "PATTERNS": [
       {
         "gSize": 3,

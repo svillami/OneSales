@@ -150,7 +150,7 @@ dataBase.transaction(selectRecords, errorInQuery, successResults);
 
 function selectRecords(tx)
 {
-    tx.executeSql('SELECT * FROM OCRD T0, OCTG T1, OCPR T2 WHERE T0.paymentGroupNum=T1.PaymentGroupNum AND T0.contactCode=T2.contactCode', [], successResults,errorInQuery);
+    tx.executeSql('SELECT * FROM OCRD T0 left outer join OCTG T1 on T0.paymentGroupNum=T1.PaymentGroupNum left outer join OCPR T2 on T0.contactCode=T2.contactCode', [], successResults,errorInQuery);
 }
  
 function successResults(tx,results)

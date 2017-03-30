@@ -81,7 +81,7 @@
 
             </ons-row>
             <ons-row>
-                {{ getParamsInvoices().baseImp }},00 Bs.
+                {{ getParamsInvoices().baseImp | currency:"Bs. ":2}}
             </ons-row>
           </ons-list-item>
 
@@ -91,7 +91,7 @@
 
             </ons-row>
             <ons-row>
-                {{ getParamsInvoices().VatSum }},00 Bs.
+                {{ getParamsInvoices().VatSum | currency:"Bs. ":2}}
             </ons-row>
           </ons-list-item>
 
@@ -101,7 +101,7 @@
                   
             </ons-row>
             <ons-row>
-               {{ getParamsInvoices().docTotal }},00 Bs.
+               {{ getParamsInvoices().docTotal | currency:"Bs. ":2}}
             </ons-row>
           </ons-list-item>
     </ons-list>
@@ -133,7 +133,7 @@
             <ons-row>
              <ons-col class="order-client">
                 <span style="color:#4282cc"> Total: </span>
-                <span style="color:black">{{documentLine.lineTotal}},00 Bs. </span>
+                <span style="color:black">{{documentLine.lineTotal | currency:"Bs. ":2}} </span>
                 </ons-col>
             </ons-row>
 

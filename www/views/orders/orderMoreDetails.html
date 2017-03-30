@@ -48,7 +48,7 @@
                  	
             </ons-row>
             <ons-row>
-                {{getParamsOrderLine().price }},00 Bs.
+                {{getParamsOrderLine().price | currency:"Bs. ":2}}
             </ons-row>
           </ons-list-item>
 
@@ -58,7 +58,7 @@
                   
             </ons-row>
             <ons-row>
-               {{ getParamsOrderLine().lineTotal}},00 Bs.
+               {{ getParamsOrderLine().lineTotal | currency:"Bs. ":2}}
             </ons-row>
           </ons-list-item>
 </ons-list>

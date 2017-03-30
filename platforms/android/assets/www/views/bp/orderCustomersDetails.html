@@ -72,7 +72,7 @@
 
             </ons-row>
             <ons-row>
-               {{getParams().baseImp}},00 Bs.
+               {{getParams().baseImp | currency:"Bs. ":2}}
             </ons-row>
           </ons-list-item>
 
@@ -83,7 +83,7 @@
             </ons-row>
             <ons-row>
             
-                {{getParams().VatSum}},00 Bs.
+                {{getParams().VatSum | currency:"Bs. ":2}}
             </ons-row>
           </ons-list-item>
 
@@ -93,7 +93,7 @@
                   
             </ons-row>
             <ons-row>
-               {{ getParams().docTotal }},00 Bs.
+               {{ getParams().docTotal | currency:"Bs. ":2}}
             </ons-row>
           </ons-list-item>
     </ons-list>
@@ -120,7 +120,7 @@
                 <span style="color:#4282cc">{{orderLine.dscription}} </span>
             </ons-row>
             <ons-row>
-                <span style="color:black"> Total: {{orderLine.lineTotal}},00 Bs. </span>
+                <span style="color:black"> Total: {{orderLine.lineTotal | currency:"Bs. ":2}} </span>
             </ons-row>
 
         </ons-list-item>

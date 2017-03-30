@@ -19,10 +19,10 @@ function getPayments(){
       var queryFilter="SELECT * FROM ORCT T0 " ;
 
 
-      if (options.businessPartner.cardName != null && typeof(options.businessPartner.cardName) != 'undefined')
+      if (options.businessPartner.cardCode != null && typeof(options.businessPartner.cardCode) != 'undefined')
       {
 
-        queryFilter = queryFilter +" WHERE T0.cardName='"+options.businessPartner.cardName+"'";
+        queryFilter = queryFilter +" WHERE T0.cardCode='"+options.businessPartner.cardCode+"'";
 
       }
 
@@ -30,7 +30,7 @@ function getPayments(){
 
          dataBase.transaction(function(tx) {
 
-         //alert('carajo');
+        
             tx.executeSql(queryFilter, 
                        [],
                        function(tx, results)
@@ -167,13 +167,13 @@ $scope.paymentmethods=false;
       //Take the value chosen, in the previous option
       var options = salesNavigator.getCurrentPage().options;
       
-        var queryFilter="SELECT * FROM OINV NV, RCT2 RC WHERE NV.docEntry= RC.invoiceId";
-        
+        var queryFilter="SELECT NV.* FROM OINV NV, RCT2 RC , ORCT T2 WHERE NV.docEntry= RC.invoiceId AND T2.docEntry=RC.paymentId";
+         
        
       if (options.payment.docEntry != null && typeof(options.payment.docEntry) != 'undefined')
       {
 
-        queryFilter = queryFilter +" AND NV.docEntry='"+options.payment.docEntry+"' "   ;
+        queryFilter = queryFilter +" AND T2.docEntry='"+options.payment.docEntry+"' "   ;
 
       } 
 

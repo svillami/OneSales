@@ -69,7 +69,7 @@
           <ons-switch modifier="list-item" ng-model="check" ng-change="activarPagoCuenta();"></ons-switch>
         </ons-list-item>
  
-        <ons-list-item> <span style="color:blue">Monto Pago a cuenta: <span style="color:black">{{  getParams().payNoDocSum }} </span></span>
+        <ons-list-item> <span style="color:blue">Monto Pago a cuenta: <span style="color:black">{{  getParams().payNoDocSum | currency:"Bs. ":2}} </span></span>
 <input type="number" class="text-input text-input--transparent" ng-show="check"  ng-model="payNoDocSum" ng-change="addPayNoDocSum();"placeholder="Monto pago a cuenta" style="width: 100%">
         </ons-list-item>
 
@@ -88,7 +88,7 @@
  <ons-list > 
 <ons-list-item modifier="chevron" ng-click="goToPendingDocs();">
  <span style="color:blue">Documentos a pagar:</span>
-<span style="color:black">{{ getParams().invoices.length }}&nbsp&nbsp{{ getParams().appliedInvoiceSum}} Bs</span>
+<span style="color:black">{{ getParams().invoices.length }}&nbsp&nbsp{{ getParams().appliedInvoiceSum | currency:"Bs. ":2}}</span>
 </ons-list-item>
  </ons-list>
 
@@ -98,7 +98,7 @@
 <ons-list-item modifier="chevron" ng-click="goToPaymentMeans();">
  <span style="color:blue">Medios de Pago:</span>
 
- <span style="color:blue">{{  getParams().docTotal }} 
+ <span style="color:blue">{{  getParams().docTotal | currency:"Bs. ":2}} 
 </span></ons-list-item>
  </ons-list>
 
@@ -107,10 +107,10 @@
 <div>
  <ons-list > 
 <ons-list-item >
- <span style="color:blue">Total a Pagar: <span style="color:black"> {{  getParams().pendingToPaid }}</span></span>
+ <span style="color:blue">Total a Pagar: <span style="color:black"> {{  getParams().pendingToPaid | currency:"Bs. ":2.}}</span></span>
 </ons-list-item>
 <ons-list-item >
- <span style="color:blue">Pagado:<span style="color:black"> {{  getParams().docTotal }}</span></span>
+ <span style="color:blue">Pagado:<span style="color:black"> {{  getParams().docTotal | currency:"Bs. ":2 }}</span></span>
 </ons-list-item>
 
 

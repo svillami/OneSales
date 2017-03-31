@@ -41,8 +41,8 @@
 </ons-row>
 
 <div style="text-align: center;">
-  <span  ng-click="invoiceDetails($index,item);" style="color:blue;">Total:<span style="color:black;">{{doc.docTotal}}</span></span>&nbsp-&nbsp
-  <span ng-click="invoiceDetails($index,item);" style="color:blue;">Saldo:&nbsp<span style="color:black;">{{doc.pending}}</span></span>
+  <span  ng-click="invoiceDetails($index,item);" style="color:blue;">Total:<span style="color:black;">{{doc.docTotal | currency:"Bs. ":2}}</span></span>&nbsp-&nbsp
+  <span ng-click="invoiceDetails($index,item);" style="color:blue;">Saldo:&nbsp<span style="color:black;">{{doc.pending }}</span></span>
  
 </div>
 <ons-row >

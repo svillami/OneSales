@@ -73,7 +73,7 @@
         </ons-list-item>
     <ons-list-item  >
 
-  <ons-list-item><span style="color:blue">Monto: {{ getParams().cashSum }}</span>
+  <ons-list-item><span style="color:blue">Monto: {{ getParams().cashSum | currency:"Bs. ":2}}</span>
 <input type="number" class="text-input text-input--transparent" ng-model="cashSum" ng-change="addCashSum();" placeholder="Efectivo" style="width: 100%" ng-init="2">
         </ons-list-item>
   </ons-list>
@@ -93,7 +93,7 @@
   <input type="date" class="text-input--transparent" style="width: 100%" ng-model="transferDate">
  
         </ons-list-item>
-  <ons-list-item><span style="color:blue">Monto: {{ getParams().transfSum }}</span>
+  <ons-list-item><span style="color:blue">Monto: {{ getParams().transfSum | currency:"Bs. ":2 }}</span>
 <input type="number" class="text-input text-input--transparent" ng-model="transferSum" ng-change="addTransferSum();" placeholder="Monto Transferencia" style="width: 100%">
         </ons-list-item>
         <ons-list-item><span style="color:blue">Referencia:</span>
@@ -149,7 +149,7 @@
 <ons-row >
  <ons-col align="center">
 <div style="text-align: center;">
-  <span  ng-click="" style="color:blue;">{{check.checkAmount}} Bs.</span>
+  <span  ng-click="" style="color:blue;">{{check.checkAmount | currency:"Bs. ":2}}</span>
 
 </div>
 </ons-col>
